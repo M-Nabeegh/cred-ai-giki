@@ -20,12 +20,17 @@ export default function LoginPage() {
             const phone = (document.getElementById("phone") as HTMLInputElement).value
             const password = (document.getElementById("password") as HTMLInputElement).value
 
-            await db.authenticateUser(phone, password)
+            const user = await db.authenticateUser(phone, password)
 
             // Store session
             localStorage.setItem("credai_user", phone)
+            localStorage.setItem("credai_user_id", user.id)
 
-            router.push("/dashboard")
+            if (user.phone === "admin" || user.name === "Admin") {
+                router.push("/admin")
+            } else {
+                router.push("/dashboard")
+            }
         } catch (error: any) {
             alert(error.message)
         } finally {
@@ -46,9 +51,9 @@ export default function LoginPage() {
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
                             <label htmlFor="phone" className="text-sm font-medium text-gray-300">
-                                Phone Number
+                                Phone Number or Username
                             </label>
-                            <Input id="phone" placeholder="0300 1234567" required />
+                            <Input id="phone" placeholder="0300 1234567 or username" required />
                         </div>
                         <div className="space-y-2">
                             <label htmlFor="password" className="text-sm font-medium text-gray-300">

@@ -1,7 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "package.json", "use": "@vercel/next" }
-  ],
-  "routes": []
+    "framework": "nextjs",
+    "buildCommand": "next build",
+    "outputDirectory": ".next"
 }

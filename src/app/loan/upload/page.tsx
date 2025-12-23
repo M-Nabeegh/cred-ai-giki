@@ -11,13 +11,33 @@ export default function DocumentUploadPage() {
     const [isUploading, setIsUploading] = useState(false)
     const [file, setFile] = useState<string | null>(null)
 
-    const handleUpload = () => {
+    const handleUpload = async () => {
         setIsUploading(true)
-        // Simulate upload
-        setTimeout(() => {
+        try {
+            const { db } = await import("@/lib/db")
+            const userId = localStorage.getItem("credai_user_id")
+            const amount = localStorage.getItem("loan_amount") || "0"
+
+            if (userId && file) {
+                // 1. Upload Document
+                const doc = await db.uploadDocument(userId, {
+                    name: file,
+                    type: "application/pdf", // Mock type
+                    url: "https://example.com/mock-doc.pdf" // Mock URL
+                })
+
+                // 2. Create Loan Application
+                await db.createLoan(userId, parseInt(amount), doc.url)
+            }
+
+            setTimeout(() => {
+                setIsUploading(false)
+                router.push("/dashboard")
+            }, 1500)
+        } catch (error) {
+            console.error("Upload failed", error)
             setIsUploading(false)
-            router.push("/dashboard")
-        }, 2000)
+        }
     }
 
     return (

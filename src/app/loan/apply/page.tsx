@@ -18,18 +18,33 @@ export default function LoanApplyPage() {
         setIsLoading(true)
         const loanAmount = parseInt(amount)
 
-        // Simulate processing
-        setTimeout(() => {
+        // Save amount for upload step if needed
+        localStorage.setItem("loan_amount", amount)
+
+        try {
             if (loanAmount > 500000) {
-                setStatus("redirecting")
+                // Large loans need docs
                 setTimeout(() => {
-                    router.push("/loan/upload")
-                }, 1500)
+                    setStatus("redirecting")
+                    setTimeout(() => {
+                        router.push("/loan/upload")
+                    }, 1500)
+                }, 1000)
             } else {
+                // Small loans instant approval (mock)
+                const { db } = await import("@/lib/db")
+                const userId = localStorage.getItem("credai_user_id")
+                if (userId) {
+                    await db.createLoan(userId, loanAmount)
+                }
+
                 setStatus("approved")
                 setIsLoading(false)
             }
-        }, 1500)
+        } catch (error) {
+            console.error(error)
+            setIsLoading(false)
+        }
     }
 
     if (status === "approved") {

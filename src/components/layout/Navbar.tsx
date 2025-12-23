@@ -1,8 +1,18 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CreditCard } from "lucide-react"
+import { usePathname } from "next/navigation"
 
 export function Navbar() {
+    const pathname = usePathname()
+
+    // Hide navbar on dashboard, admin, and loan pages
+    if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/admin") || pathname?.startsWith("/loan")) {
+        return null
+    }
+
     return (
         <nav className="fixed top-0 w-full z-50 glass border-b border-white/10">
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">

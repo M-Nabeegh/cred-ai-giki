@@ -26,7 +26,7 @@ export default function RegisterPage() {
             const income = parseInt((document.getElementById("income") as HTMLInputElement).value)
             const password = (document.getElementById("password") as HTMLInputElement).value
 
-            await db.createUser({
+            const newUser = await db.createUser({
                 phone,
                 cnic,
                 income,
@@ -34,8 +34,9 @@ export default function RegisterPage() {
                 name: "New User" // Placeholder
             })
 
-            // Store session (simplified)
+            // Store session
             localStorage.setItem("credai_user", phone)
+            localStorage.setItem("credai_user_id", newUser.id)
 
             router.push("/onboarding")
         } catch (error: any) {

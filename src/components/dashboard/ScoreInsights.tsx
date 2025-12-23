@@ -1,34 +1,39 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowUp, ArrowDown, Minus } from "lucide-react"
+import { type User } from "@/lib/db"
 
-const insights = [
-    {
-        factor: "Utility Bill Payments",
-        impact: "Positive",
-        change: "+20",
-        description: "Consistent on-time payments for electricity.",
-        icon: ArrowUp,
-        color: "text-emerald-500",
-    },
-    {
-        factor: "Mobile Top-up Frequency",
-        impact: "Neutral",
-        change: "0",
-        description: "Regular top-ups observed.",
-        icon: Minus,
-        color: "text-gray-400",
-    },
-    {
-        factor: "Loan Repayment History",
-        impact: "Negative",
-        change: "-10",
-        description: "Late payment on previous micro-loan.",
-        icon: ArrowDown,
-        color: "text-red-500",
-    },
-]
+export function ScoreInsights({ user }: { user: User | null }) {
+    if (!user) return null
 
-export function ScoreInsights() {
+    const insights = [
+        {
+            factor: "Utility Bill Payments",
+            impact: user.utilityHistory?.latePayments === 0 ? "Positive" : "Negative",
+            change: user.utilityHistory?.latePayments === 0 ? "+50" : `-${(user.utilityHistory?.latePayments || 0) * 20}`,
+            description: user.utilityHistory?.latePayments === 0
+                ? "Excellent! No late utility payments recorded."
+                : `${user.utilityHistory?.latePayments} late payments detected.`,
+            icon: user.utilityHistory?.latePayments === 0 ? ArrowUp : ArrowDown,
+            color: user.utilityHistory?.latePayments === 0 ? "text-emerald-500" : "text-red-500",
+        },
+        {
+            factor: "Telco Usage",
+            impact: "Positive",
+            change: "+30",
+            description: `Consistent high usage history (${user.telcoHistory?.tenureYears} years).`,
+            icon: ArrowUp,
+            color: "text-emerald-500",
+        },
+        {
+            factor: "Income Stability",
+            impact: "Positive",
+            change: user.income > 50000 ? "+50" : "+20",
+            description: "Verifiable monthly income source linked.",
+            icon: ArrowUp,
+            color: "text-emerald-500",
+        },
+    ]
+
     return (
         <Card className="glass-card border-white/10 h-full">
             <CardHeader>
