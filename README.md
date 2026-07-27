@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CredAI
 
-## Getting Started
+An interactive fintech prototype exploring alternative credit scoring, borrower onboarding, loan applications, and role-based dashboards for Pakistan.
 
-First, run the development server:
+[![Live demo](https://img.shields.io/badge/Live_Demo-Open-22c55e?style=for-the-badge)](https://cred-ai-giki.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+> **Prototype status:** CredAI is a portfolio and coursework demonstration, not a production lending system. It uses in-browser mock data and demo authentication. Do not enter real financial, identity, or password data.
+
+## Highlights
+
+- Borrower registration and onboarding flows
+- Credit-profile and loan-application experiences
+- User and administrator dashboards
+- Responsive interface with motion and reusable components
+- Domain-based routing for the deployed demo
+- Seeded mock data for repeatable demonstrations
+
+## Live demo
+
+Visit **[cred-ai-giki.vercel.app](https://cred-ai-giki.vercel.app/)**.
+
+Use only fictional information. The current build stores demo state in the browser and does not provide production-grade authentication or persistence.
+
+## Tech stack
+
+- Next.js 16 and React 19
+- TypeScript
+- Tailwind CSS
+- Radix UI primitives
+- Framer Motion
+- Recharts
+- Vercel
+
+## Architecture
+
+```mermaid
+flowchart LR
+    UI["Next.js App Router UI"] --> FLOWS["Onboarding, loans, dashboards"]
+    FLOWS --> STORE["In-browser mock data layer"]
+    STORE --> SEED["Seeded demo users and credit data"]
+    UI --> ROUTING["Domain-based middleware routing"]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Key areas:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/app/` — pages and route groups
+- `src/components/` — shared interface components
+- `src/lib/db.ts` — mock data and demo authentication
+- `src/middleware.ts` — domain-based routing
+- `public/` — static assets
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Run locally
 
-## Learn More
+Requirements: Node.js 20+ and npm.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+git clone https://github.com/M-Nabeegh/cred-ai-giki.git
+cd cred-ai-giki
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Validation
 
-## Deploy on Vercel
+```bash
+npm run lint
+npm run build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Roadmap to production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Before using this beyond a demo, replace the mock data layer with a secured backend, hash credentials server-side, add authorization checks, validate all inputs, add automated tests, complete a privacy/security review, and document the credit-scoring methodology and fairness safeguards.
+
+## License
+
+No open-source license has been selected yet. The source is public for portfolio review; reuse rights are not granted automatically.
