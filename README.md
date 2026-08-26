@@ -1,78 +1,99 @@
 # CredAI
 
-An interactive fintech prototype exploring alternative credit scoring, borrower onboarding, loan applications, and role-based dashboards for Pakistan.
+CredAI is an interactive fintech prototype for transparent alternative credit intelligence in Pakistan. It demonstrates how synthetic utility, telecom, wallet, cash-flow, and repayment behavior can be transformed into explainable decision-support signals for customers, banks, and platform administrators.
 
 [![Live demo](https://img.shields.io/badge/Live_Demo-Open-22c55e?style=for-the-badge)](https://cred-ai-giki.vercel.app/)
 
-> **Prototype status:** CredAI is a portfolio and coursework demonstration, not a production lending system. It uses in-browser mock data and demo authentication. Do not enter real financial, identity, or password data.
+> Prototype status: CredAI is not production lending software. It uses synthetic data and demo authentication only. It does not provide a real credit score, financial advice, loan approval, or credit decision. Do not enter real CNICs, financial records, passwords, OTPs, tokens, or private account information.
 
-## Highlights
+## Product surfaces
 
-- Borrower registration and onboarding flows
-- Credit-profile and loan-application experiences
-- User and administrator dashboards
-- Responsive interface with motion and reusable components
-- Domain-based routing for the deployed demo
-- Seeded mock data for repeatable demonstrations
+- Public website: `/`, `/how-it-works`, `/for-customers`, `/for-banks`, `/security`, `/about`, `/contact`
+- Demo auth: `/login`, `/register`
+- Customer portal: `/customer/dashboard`, `/customer/score`, `/customer/data`, `/customer/data-sources`, `/customer/loans`, `/customer/loans/apply`, `/customer/activity`, `/customer/settings`, `/customer/help`
+- Bank portal: `/bank/dashboard`, `/bank/applications`, `/bank/applications/[id]`, `/bank/applicants`, `/bank/applicants/[id]`, `/bank/portfolio`, `/bank/decisioning`, `/bank/model`, `/bank/audit`, `/bank/settings`
+- Admin portal: `/admin`, `/admin/dashboard`, `/admin/users`, `/admin/organizations`, `/admin/data-sources`, `/admin/synthetic-data`, `/admin/models`, `/admin/models/[id]`, `/admin/training`, `/admin/fairness`, `/admin/audit`, `/admin/settings`
 
-## Live demo
+Legacy routes `/dashboard`, `/loan/apply`, `/loan/upload`, and `/onboarding` remain compatible through redirects or updated demo screens.
 
-Visit **[cred-ai-giki.vercel.app](https://cred-ai-giki.vercel.app/)**.
+## Demo accounts
 
-Use only fictional information. The current build stores demo state in the browser and does not provide production-grade authentication or persistence.
+| Role | Login | Password | Landing route |
+| --- | --- | --- | --- |
+| Customer | `customer` | `demo1234` | `/customer/dashboard` |
+| Bank analyst | `analyst` | `demo1234` | `/bank/dashboard` |
+| Bank manager | `manager` | `demo1234` | `/bank/dashboard` |
+| Admin | `admin` | `123456` | `/admin/dashboard` |
 
-## Tech stack
-
-- Next.js 16 and React 19
-- TypeScript
-- Tailwind CSS
-- Radix UI primitives
-- Framer Motion
-- Recharts
-- Vercel
+See `docs/credai-rebuild/demo-accounts.md` for the full list, including legacy demo accounts.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    UI["Next.js App Router UI"] --> FLOWS["Onboarding, loans, dashboards"]
-    FLOWS --> STORE["In-browser mock data layer"]
-    STORE --> SEED["Seeded demo users and credit data"]
-    UI --> ROUTING["Domain-based middleware routing"]
+    Public[Public marketing site] --> Login[Demo role login]
+    Login --> Customer[Customer portal]
+    Login --> Bank[Bank portal]
+    Login --> Admin[Admin portal]
+    Data[Synthetic data generator] --> Features[Typed feature engineering]
+    Features --> Baseline[Transparent baseline score]
+    Features --> Logistic[Small logistic model artifact]
+    Baseline --> Explain[Reason codes and score explanations]
+    Logistic --> Explain
+    Explain --> Customer
+    Explain --> Bank
+    Admin --> Data
 ```
 
-Key areas:
+Key files:
 
-- `src/app/` — pages and route groups
-- `src/components/` — shared interface components
-- `src/lib/db.ts` — mock data and demo authentication
-- `src/middleware.ts` — domain-based routing
-- `public/` — static assets
+- `src/lib/credai-data.ts` — deterministic synthetic profiles, applications, audit events, dataset summary, and formatting helpers.
+- `src/lib/permissions.ts` — central role and permission map for customer, bank analyst, bank manager, and admin roles.
+- `src/lib/scoring/` — feature definitions, baseline score, logistic inference, explanations, model registry, and checked-in artifact.
+- `src/components/portal/` — public marketing pages, portal shells, score cards, dashboard panels, application tables, and admin views.
+- `scripts/` — reproducible synthetic-data, model-training, model-evaluation, and deterministic test commands.
+- `docs/credai-rebuild/` — discovery, product, architecture, data dictionary, model card, demo accounts, compliance notes, and QA checklist.
 
-## Run locally
+## Scoring model
+
+CredAI includes two scoring paths:
+
+1. Transparent baseline scorecard using these category weights:
+   - Repayment behavior: 30%
+   - Utility payment consistency: 15%
+   - Wallet cash-flow stability: 20%
+   - Telecom continuity: 10%
+   - General financial stability: 15%
+   - Account tenure: 5%
+   - Data completeness: 5%
+2. Small logistic regression artifact for `simulated_repayment_success`, trained only on synthetic features and mapped to the 300–850 demo score range.
+
+The model excludes protected attributes and obvious proxies. Synthetic audit groups are used only for fairness diagnostics, not as model inputs.
+
+## Local commands
 
 Requirements: Node.js 20+ and npm.
 
 ```bash
-git clone https://github.com/M-Nabeegh/cred-ai-giki.git
-cd cred-ai-giki
 npm install
 npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-## Validation
-
-```bash
 npm run lint
+npm run typecheck
+npm run test
+npm run data:generate
+npm run model:train
+npm run model:evaluate
 npm run build
 ```
 
-## Roadmap to production
+## Verification notes
 
-Before using this beyond a demo, replace the mock data layer with a secured backend, hash credentials server-side, add authorization checks, validate all inputs, add automated tests, complete a privacy/security review, and document the credit-scoring methodology and fairness safeguards.
+The Qoder shell used during this rebuild did not expose `node` or `npm` on PATH, so npm commands may need to be run in a local terminal with Node.js installed. `git diff --check` is used for whitespace validation when npm is unavailable.
+
+## Production work still required
+
+Before real use, replace demo authentication with production authentication, move data access to a secure backend, implement encrypted persistence, perform privacy/security/credit-law reviews, validate models on representative real-world data, define governance and monitoring, and complete accessibility and usability testing with target users.
 
 ## License
 
-No open-source license has been selected yet. The source is public for portfolio review; reuse rights are not granted automatically.
+MIT. See `LICENSE`.

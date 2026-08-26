@@ -1,24 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Mode (Default - though we might prefer dark for premium feel) */
-  --background: #ffffff;
-  --foreground: #0f172a;
-  
-  /* Premium Brand Colors */
-  --color-brand-DEFAULT: #3B82F6;
-  --color-brand-dark: #1E40AF;
-  --color-brand-light: #60A5FA;
-  --color-brand-glow: #2563EB;
-
-  /* Accent Colors */
-  --color-accent-DEFAULT: #10B981;
-  --color-accent-glow: #34D399;
-
-  /* Dark Shades */
-  --color-dark-900: #0F172A;
-  --color-dark-800: #1E293B;
-  --color-dark-700: #334155;
+  --background: #020617;
+  --foreground: #f8fafc;
+  --color-brand-DEFAULT: #2dd4bf;
+  --color-brand-dark: #0f766e;
+  --color-brand-light: #5eead4;
+  --color-brand-glow: #14b8a6;
+  --color-accent-DEFAULT: #f59e0b;
+  --color-accent-glow: #fbbf24;
+  --color-dark-900: #020617;
+  --color-dark-800: #0f172a;
+  --color-dark-700: #1e293b;
 }
 
 @theme inline {
@@ -33,16 +26,16 @@
   --color-dark-900: var(--color-dark-900);
   --color-dark-800: var(--color-dark-800);
   --color-dark-700: var(--color-dark-700);
-  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0F172A; /* Deep Blue/Slate */
-    --foreground: #F8FAFC;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -51,22 +44,38 @@ body {
   font-family: var(--font-sans), sans-serif;
 }
 
+:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @layer utilities {
   .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.68);
+    backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   .glass-card {
-    background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: rgba(15, 23, 42, 0.74);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 80px rgba(2, 6, 23, 0.32);
   }
 
   .text-gradient {
-    background: linear-gradient(to right, #60A5FA, #34D399);
+    background: linear-gradient(to right, #99f6e4, #fef3c7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
