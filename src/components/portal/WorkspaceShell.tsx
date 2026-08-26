@@ -1,11 +1,17 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useEffect, useState, type ReactNode } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { useSyncExternalStore, type ReactNode } from "react"
 import { canAccessWorkspace, roleLabels, type Role } from "@/lib/permissions"
 
 const validRoles: Role[] = ["customer", "bank_analyst", "bank_manager", "admin"]
+const sessionKeys = ["credai_user", "credai_user_id", "credai_role", "credai_display_name"]
+
+export function clearDemoSession() {
+  if (typeof window === "undefined") return
+  for (const key of sessionKeys) localStorage.removeItem(key)
+}
 
 function readStoredRole(): Role | null {
   if (typeof window === "undefined") return null
@@ -13,28 +19,23 @@ function readStoredRole(): Role | null {
   return validRoles.includes(storedRole as Role) ? storedRole as Role : null
 }
 
-function StoredRoleBadge() {
-  const [role, setRole] = useState<Role | null>(null)
+function subscribeToStorage(callback: () => void) {
+  window.addEventListener("storage", callback)
+  return () => window.removeEventListener("storage", callback)
+}
 
-  useEffect(() => {
-    setRole(readStoredRole())
-  }, [])
+function useStoredRole(): Role | null {
+  return useSyncExternalStore(subscribeToStorage, readStoredRole, () => null)
+}
+
+function StoredRoleBadge() {
+  const role = useStoredRole()
 
   return <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">{role ? roleLabels[role] : "No role selected"}</span>
 }
 
 export function DemoRouteGuard({ workspace, children }: { workspace: "customer" | "bank" | "admin"; children: ReactNode }) {
-  const [role, setRole] = useState<Role | null>(null)
-  const [checked, setChecked] = useState(false)
-
-  useEffect(() => {
-    setRole(readStoredRole())
-    setChecked(true)
-  }, [])
-
-  if (!checked) {
-    return <div className="p-8 text-slate-200">Loading demo session...</div>
-  }
+  const role = useStoredRole()
 
   if (!role) {
     return (
@@ -87,6 +88,12 @@ export function WorkspaceShell({
   children: ReactNode
 }) {
   const pathname = usePathname()
+  const router = useRouter()
+
+  function logout() {
+    clearDemoSession()
+    router.push("/login")
+  }
 
   return (
     <DemoRouteGuard workspace={workspace}>
@@ -138,7 +145,10 @@ export function WorkspaceShell({
                 <h1 className="text-3xl font-bold tracking-tight text-white md:text-5xl">{title}</h1>
                 <p className="mt-3 max-w-3xl text-slate-300">{description}</p>
               </div>
-              <Link href="/login" className="rounded-xl border border-white/10 px-4 py-2 text-sm text-slate-200 hover:bg-white/10">Switch demo role</Link>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/login" className="rounded-xl border border-white/10 px-4 py-2 text-sm text-slate-200 hover:bg-white/10">Switch demo role</Link>
+                <button onClick={logout} className="rounded-xl border border-red-300/30 px-4 py-2 text-sm text-red-100 hover:bg-red-300/10">Log out</button>
+              </div>
             </header>
             {children}
           </section>
