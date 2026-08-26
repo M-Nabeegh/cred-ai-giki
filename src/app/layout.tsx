@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cred AI | AI-Driven Credit Scoring",
-  description: "Financial inclusion for everyone. Get your credit score based on alternative data.",
+  title: "CredAI | Transparent Alternative Credit Intelligence",
+  description: "Synthetic-data prototype for transparent alternative credit intelligence and human lending review workflows.",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-screen selection:bg-brand/30`}
       >
         <Navbar />
-        <main className="pt-16">
+        <main>
           {children}
         </main>
       </body>

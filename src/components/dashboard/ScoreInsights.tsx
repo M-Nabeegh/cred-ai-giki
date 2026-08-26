@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowUp, ArrowDown, Minus } from "lucide-react"
+import { ArrowUp, ArrowDown } from "lucide-react"
 import { type User } from "@/lib/db"
 
 export function ScoreInsights({ user }: { user: User | null }) {

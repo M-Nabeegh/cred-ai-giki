@@ -1,3 +1,9 @@
+// LEGACY COMPATIBILITY CODE — not part of the new CredAI portal path.
+// The new portal uses one authoritative synthetic-data and scoring path:
+// src/lib/credai-data.ts + src/lib/scoring/* + src/lib/demo-store.ts.
+// This in-memory mock database is kept only so the legacy routes
+// (/dashboard, /loan/*, /onboarding) keep working unchanged.
+//
 // Mock Database Service
 // Using a simple in-memory store for demo purposes. 
 // In a real app, this would be a database connection (Postgres/Prisma).
@@ -365,7 +371,7 @@ class MockDB {
     // US-13: Admin Review
     async getAllDocuments(): Promise<{ user: User, document: Document }[]> {
         await new Promise(resolve => setTimeout(resolve, 500))
-        let allDocs: { user: User, document: Document }[] = [];
+        const allDocs: { user: User, document: Document }[] = [];
 
         this.users.forEach(user => {
             user.documents.forEach(doc => {

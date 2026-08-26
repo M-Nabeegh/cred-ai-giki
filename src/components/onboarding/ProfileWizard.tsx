@@ -38,7 +38,7 @@ export function ProfileWizard({ onComplete }: { onComplete: () => void }) {
                 if (userId) {
                     await db.updateProfile(userId, {
                         dependents: parseInt(formData.dependents),
-                        householdType: formData.householdType as any,
+                        householdType: formData.householdType === "" ? undefined : (formData.householdType as "owned" | "rented" | "family"),
                         // Map bracket to approx income if needed, or just keep original income
                         // For this user story, we'll update income based on bracket if provided
                         income: formData.incomeBracket === "low" ? 25000 :

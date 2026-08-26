@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { CheckCircle, Loader2, Server, Smartphone, Zap, ShieldCheck, Database, Lock } from "lucide-react"
+import { CheckCircle, Loader2, Smartphone, Zap, ShieldCheck, Database, Lock } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
 
 const steps = [
     { id: "nadra", label: "Verifying Identity (NADRA)", icon: ShieldCheck, color: "text-blue-400" },
