@@ -51,19 +51,26 @@ export type ScoreResult = {
 
 export type ModelArtifact = {
   modelVersion: string
+  modelType?: "Logistic regression" | "Rule-based weighted scorecard"
   featureNames: string[]
   featureDirections: Record<string, FeatureDirection>
   means: Record<string, number>
   standardDeviations: Record<string, number>
+  imputationValues?: Record<string, number>
   coefficients: Record<string, number>
   intercept: number
+  threshold?: number
   trainingRowCount: number
   testRowCount: number
+  trainingPositiveRate?: number
+  testPositiveRate?: number
   seed: string
   trainingTimestamp: string
   metrics: ModelMetrics
   labelDefinition: string
   generatorVersion: string
+  leakageSafeguards?: string[]
+  artifactDigest?: string
 }
 
 export type ModelMetrics = {

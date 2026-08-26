@@ -5,10 +5,29 @@ import type { Role } from "./permissions"
 import type { ModelMetrics, ScoreResult } from "./scoring/types"
 
 export const DEMO_SEED = "credai-demo-v1"
-export const GENERATOR_VERSION = "synthetic-generator-v1.0.0"
+export const GENERATOR_VERSION = "synthetic-generator-v1.1.0"
 export const DEMO_TIMESTAMP = "2026-08-26T09:00:00+05:00"
 
 export type SourceKey = "utility" | "telecom" | "jazzcash" | "easypaisa" | "cashflow" | "repayment"
+export type SourceConsentState = Record<SourceKey, boolean>
+
+export const sourceFeatureMap: Record<SourceKey, string[]> = {
+  utility: ["utility_on_time_ratio", "utility_missed_payment_rate", "utility_amount_volatility", "utility_observation_months"],
+  telecom: ["telecom_recharge_regularity", "telecom_account_tenure_months", "telecom_failed_payment_rate"],
+  jazzcash: ["wallet_inflow_regularity", "wallet_failed_transaction_rate"],
+  easypaisa: ["wallet_outflow_volatility", "wallet_balance_stability"],
+  cashflow: ["bill_payment_consistency", "cash_flow_coverage", "income_stability", "expense_volatility", "negative_balance_days"],
+  repayment: ["simulated_repayment_ratio", "simulated_days_late_average"],
+}
+
+export const sourceLabels: Record<SourceKey, string> = {
+  utility: "Simulated utility data",
+  telecom: "Simulated telecom data",
+  jazzcash: "Simulated JazzCash data",
+  easypaisa: "Simulated Easypaisa data",
+  cashflow: "Simulated bank-cashflow data",
+  repayment: "Simulated repayment data",
+}
 
 export type DataSourceStatus = {
   source: SourceKey
@@ -21,12 +40,12 @@ export type DataSourceStatus = {
 
 export type FinancialObservation = {
   month: string
-  utilityOnTimeRatio: number
-  telecomContinuity: number
-  walletInflowRegularity: number
-  walletOutflowVolatility: number
-  cashFlowCoverage: number
-  repaymentRatio: number
+  utilityOnTimeRatio: number | null
+  telecomContinuity: number | null
+  walletInflowRegularity: number | null
+  walletOutflowVolatility: number | null
+  cashFlowCoverage: number | null
+  repaymentRatio: number | null
 }
 
 export type SyntheticProfile = {
@@ -127,30 +146,25 @@ function rounded(value: number, decimals = 2) {
   return Math.round(value * factor) / factor
 }
 
-function sourceStatus(source: SourceKey, connected: boolean, coverage: number, contributes: string[]): DataSourceStatus {
-  const labels: Record<SourceKey, string> = {
-    utility: "Simulated utility data",
-    telecom: "Simulated telecom data",
-    jazzcash: "Simulated JazzCash data",
-    easypaisa: "Simulated Easypaisa data",
-    cashflow: "Simulated bank-cashflow data",
-    repayment: "Simulated repayment data",
-  }
-  return { source, label: labels[source], connected, coverage, contributes, lastSynced: "2026-08-25T18:00:00+05:00" }
+function clamp01(value: number) {
+  return Math.min(1, Math.max(0, value))
 }
 
-function makeFeatures(index: number, behaviorProfile: SyntheticProfile["behaviorProfile"]) {
-  const rand = createSeededRandom(`${DEMO_SEED}-${index}-${behaviorProfile}`)
-  const profileBase = {
-    steady: 0.82,
-    building: 0.66,
-    volatile: 0.5,
-    thin_file: 0.58,
-  }[behaviorProfile]
-  const jitter = (scale = 0.16) => (rand() - 0.5) * scale
-  const clamp01 = (value: number) => Math.min(1, Math.max(0, value))
-  const missing = behaviorProfile === "thin_file" ? 0.18 : 0
+function sourceStatus(source: SourceKey, connected: boolean, coverage: number): DataSourceStatus {
+  return {
+    source,
+    label: sourceLabels[source],
+    connected,
+    coverage: connected ? Math.max(35, Math.min(100, coverage)) : 0,
+    contributes: sourceFeatureMap[source],
+    lastSynced: connected ? "2026-08-25T18:00:00+05:00" : "Not connected in demo",
+  }
+}
 
+function baseFeatureValues(index: number, behaviorProfile: SyntheticProfile["behaviorProfile"]) {
+  const rand = createSeededRandom(`${DEMO_SEED}-${index}-${behaviorProfile}`)
+  const profileBase = { steady: 0.82, building: 0.66, volatile: 0.5, thin_file: 0.58 }[behaviorProfile]
+  const jitter = (scale = 0.16) => (rand() - 0.5) * scale
   return {
     utility_on_time_ratio: clamp01(profileBase + jitter()),
     utility_missed_payment_rate: clamp01(0.18 - profileBase / 7 + jitter(0.08)),
@@ -171,21 +185,48 @@ function makeFeatures(index: number, behaviorProfile: SyntheticProfile["behavior
     expense_volatility: clamp01(0.55 - profileBase / 3 + jitter()),
     negative_balance_days: Math.round(clamp01(0.7 - profileBase + jitter(0.18)) * 18),
     account_age_months: Math.round(12 + profileBase * 60 + rand() * 10),
-    data_completeness: rounded(clamp01(0.95 - missing + jitter(0.08))),
+    data_completeness: 1,
+  }
+}
+
+export function applySourceConsent(features: Record<string, number | null>, consent: SourceConsentState) {
+  const next = { ...features }
+  for (const source of Object.keys(sourceFeatureMap) as SourceKey[]) {
+    if (!consent[source]) {
+      for (const feature of sourceFeatureMap[source]) next[feature] = null
+    }
+  }
+  const allFeatureNames = Object.values(sourceFeatureMap).flat()
+  const available = allFeatureNames.filter((feature) => next[feature] !== null && next[feature] !== undefined).length
+  next.data_completeness = rounded(available / allFeatureNames.length)
+  return next
+}
+
+function consentForProfile(index: number, behaviorProfile: SyntheticProfile["behaviorProfile"]): SourceConsentState {
+  const rand = createSeededRandom(`${DEMO_SEED}-consent-${index}`)
+  const thin = behaviorProfile === "thin_file"
+  return {
+    utility: thin ? rand() > 0.18 : true,
+    telecom: rand() > 0.03,
+    jazzcash: thin ? false : rand() > 0.08,
+    easypaisa: thin ? rand() > 0.3 : rand() > 0.06,
+    cashflow: rand() > (thin ? 0.16 : 0.03),
+    repayment: thin ? false : rand() > 0.1,
   }
 }
 
 function makeObservations(index: number, features: Record<string, number | null>): FinancialObservation[] {
   const months = ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"]
   const rand = createSeededRandom(`${DEMO_SEED}-timeline-${index}`)
+  const withJitter = (value: number | null, min = 0.25, max = 1, scale = 0.12) => value === null ? null : rounded(Math.max(min, Math.min(max, value + (rand() - 0.5) * scale)))
   return months.map((month) => ({
     month,
-    utilityOnTimeRatio: rounded(Math.max(0.25, Math.min(1, Number(features.utility_on_time_ratio) + (rand() - 0.5) * 0.16))),
-    telecomContinuity: rounded(Math.max(0.25, Math.min(1, Number(features.telecom_recharge_regularity) + (rand() - 0.5) * 0.14))),
-    walletInflowRegularity: rounded(Math.max(0.25, Math.min(1, Number(features.wallet_inflow_regularity) + (rand() - 0.5) * 0.12))),
-    walletOutflowVolatility: rounded(Math.max(0.05, Math.min(0.9, Number(features.wallet_outflow_volatility) + (rand() - 0.5) * 0.15))),
-    cashFlowCoverage: rounded(Math.max(0.25, Math.min(1, Number(features.cash_flow_coverage) + (rand() - 0.5) * 0.12))),
-    repaymentRatio: rounded(Math.max(0.25, Math.min(1, Number(features.simulated_repayment_ratio) + (rand() - 0.5) * 0.11))),
+    utilityOnTimeRatio: withJitter(features.utility_on_time_ratio),
+    telecomContinuity: withJitter(features.telecom_recharge_regularity, 0.25, 1, 0.14),
+    walletInflowRegularity: withJitter(features.wallet_inflow_regularity),
+    walletOutflowVolatility: withJitter(features.wallet_outflow_volatility, 0.05, 0.9, 0.15),
+    cashFlowCoverage: withJitter(features.cash_flow_coverage),
+    repaymentRatio: withJitter(features.simulated_repayment_ratio, 0.25, 1, 0.11),
   }))
 }
 
@@ -197,18 +238,11 @@ export function generateSyntheticProfiles(count = 24): SyntheticProfile[] {
   return Array.from({ length: count }, (_, index) => {
     const behaviorProfile = profiles[index % profiles.length]
     const rand = createSeededRandom(`${DEMO_SEED}-profile-${index}`)
-    const features = makeFeatures(index, behaviorProfile)
+    const consent = consentForProfile(index, behaviorProfile)
+    const features = applySourceConsent(baseFeatureValues(index, behaviorProfile), consent)
     const score = inferLogisticScore(features, activeModelArtifact) ?? calculateBaselineScore(features)
     const dataCoverage = Math.round(Number(features.data_completeness) * 100)
-    const sources = [
-      sourceStatus("utility", true, dataCoverage - (behaviorProfile === "thin_file" ? 14 : 2), ["utility_on_time_ratio", "utility_missed_payment_rate"]),
-      sourceStatus("telecom", true, dataCoverage - 3, ["telecom_recharge_regularity", "telecom_account_tenure_months"]),
-      sourceStatus("jazzcash", behaviorProfile !== "thin_file", dataCoverage - 8, ["wallet_inflow_regularity", "wallet_failed_transaction_rate"]),
-      sourceStatus("easypaisa", true, dataCoverage - 5, ["wallet_outflow_volatility", "wallet_balance_stability"]),
-      sourceStatus("cashflow", true, dataCoverage, ["cash_flow_coverage", "income_stability", "expense_volatility"]),
-      sourceStatus("repayment", behaviorProfile !== "thin_file", dataCoverage - 10, ["simulated_repayment_ratio", "simulated_days_late_average"]),
-    ].map((source) => ({ ...source, coverage: Math.max(35, Math.min(100, source.coverage)) }))
-
+    const sources = (Object.keys(sourceFeatureMap) as SourceKey[]).map((source) => sourceStatus(source, consent[source], dataCoverage))
     return {
       id: `synthetic-customer-${String(index + 1).padStart(4, "0")}`,
       maskedCustomerId: `PK-DEMO-****-${String(4300 + index)}`,
@@ -216,17 +250,17 @@ export function generateSyntheticProfiles(count = 24): SyntheticProfile[] {
       role: "customer",
       city: cities[index % cities.length],
       organizationId: "org-meezan-demo",
-      monthlyIncomePkr: Math.round(48000 + Number(features.income_stability) * 95000 + rand() * 18000),
+      monthlyIncomePkr: Math.round(48000 + Number(features.income_stability ?? 0.55) * 95000 + rand() * 18000),
       observationMonths: behaviorProfile === "thin_file" ? 7 : 12,
       behaviorProfile,
       features,
-      score: { ...score, dataCoverage, confidence: score.confidence },
+      score: { ...score, dataCoverage, confidence: dataCoverage >= 85 ? "High coverage" : dataCoverage >= 65 ? "Medium coverage" : "Limited coverage" },
       sources,
       observations: makeObservations(index, features),
       recommendations: [
         "Keep simulated utility payments on or before due dates.",
-        "Maintain regular wallet inflows without relying on high transaction volume.",
-        "Reduce failed payments and cash-flow shortfall days in the next demo cycle.",
+        "Maintain regular wallet inflow regularity rather than focusing on high transaction volume.",
+        "Reconnect or add missing simulated sources to improve score confidence.",
       ],
     }
   })
@@ -277,8 +311,8 @@ export const datasetSummary: SyntheticDatasetSummary = {
   createdAt: DEMO_TIMESTAMP,
   profileCount: 2000,
   eventCount: 2000 * 12 * 6,
-  enabledSources: ["utility", "telecom", "jazzcash", "easypaisa", "cashflow", "repayment"],
-  missingDataRate: 0.08,
+  enabledSources: Object.keys(sourceFeatureMap),
+  missingDataRate: rounded(syntheticProfiles.reduce((sum, profile) => sum + (1 - profile.score.dataCoverage / 100), 0) / syntheticProfiles.length, 4),
   noiseLevel: 0.12,
   labelGenerationMethod: "Latent repayment-success process using consistency, stability, tenure, coverage, and controlled noise.",
 }
@@ -291,11 +325,23 @@ export function getPrimaryCustomer() {
 }
 
 export function getApplicationById(id: string) {
-  return loanApplications.find((application) => application.id === id) ?? loanApplications[0]
+  return loanApplications.find((application) => application.id === id)
 }
 
 export function getApplicantById(id: string) {
-  return syntheticProfiles.find((profile) => profile.id === id) ?? syntheticProfiles[0]
+  return syntheticProfiles.find((profile) => profile.id === id)
+}
+
+export function requireApplicationById(id: string) {
+  const application = getApplicationById(id)
+  if (!application) throw new Error(`Unknown demo application ID: ${id}`)
+  return application
+}
+
+export function requireApplicantById(id: string) {
+  const applicant = getApplicantById(id)
+  if (!applicant) throw new Error(`Unknown synthetic applicant ID: ${id}`)
+  return applicant
 }
 
 export function formatPkr(amount: number) {

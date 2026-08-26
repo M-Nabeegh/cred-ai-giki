@@ -47,7 +47,8 @@ flowchart LR
 
 Key files:
 
-- `src/lib/credai-data.ts` — deterministic synthetic profiles, applications, audit events, dataset summary, and formatting helpers.
+- `src/lib/credai-data.ts` — deterministic synthetic profiles, source-to-feature consent mapping, applications, audit events, dataset summary, and formatting helpers.
+- `src/lib/demo-store.ts` — browser-local typed demo workflow state for consent toggles, loan submissions, review decisions, and audit events.
 - `src/lib/permissions.ts` — central role and permission map for customer, bank analyst, bank manager, and admin roles.
 - `src/lib/scoring/` — feature definitions, baseline score, logistic inference, explanations, model registry, and checked-in artifact.
 - `src/components/portal/` — public marketing pages, portal shells, score cards, dashboard panels, application tables, and admin views.
@@ -66,7 +67,9 @@ CredAI includes two scoring paths:
    - General financial stability: 15%
    - Account tenure: 5%
    - Data completeness: 5%
-2. Small logistic regression artifact for `simulated_repayment_success`, trained only on synthetic features and mapped to the 300–850 demo score range.
+2. Small logistic regression artifact for `simulated_repayment_success`, trained only on synthetic features and mapped to the 300–850 demo score range. The reproducible training command writes `data/generated/logistic-demo-v1.1.0.json` and refreshes `src/lib/scoring/model-artifact.ts`.
+
+Disconnected demo sources null their mapped features, reduce coverage, and emit missing-data warnings through logistic imputation. Demo workspaces require an explicit local demo login; they no longer assign a default role when local storage is empty.
 
 The model excludes protected attributes and obvious proxies. Synthetic audit groups are used only for fairness diagnostics, not as model inputs.
 
@@ -88,7 +91,7 @@ npm run build
 
 ## Verification notes
 
-The Qoder shell used during this rebuild did not expose `node` or `npm` on PATH, so npm commands may need to be run in a local terminal with Node.js installed. `git diff --check` is used for whitespace validation when npm is unavailable.
+The Qoder shell used during this rebuild did not expose `node` or `npm` on PATH, so npm commands may need to be run in a local terminal with Node.js installed. `git diff --check` is used for whitespace validation when npm is unavailable. Browser workflow actions persist only in localStorage and are resettable from the customer/admin settings views.
 
 ## Production work still required
 

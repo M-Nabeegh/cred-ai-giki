@@ -22,7 +22,8 @@ export function inferLogisticScore(features: Record<string, number | null>, arti
     const missing = raw === null || raw === undefined || Number.isNaN(raw)
     if (missing) missingCount += 1
 
-    const value = missing ? artifact.means[featureName] : raw
+    const imputation = artifact.imputationValues?.[featureName] ?? artifact.means[featureName]
+    const value = missing ? imputation : raw
     const standardDeviation = artifact.standardDeviations[featureName] || 1
     const normalized = (value - artifact.means[featureName]) / standardDeviation
     const weighted = normalized * artifact.coefficients[featureName]

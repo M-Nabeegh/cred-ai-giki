@@ -5,22 +5,52 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState, type ReactNode } from "react"
 import { canAccessWorkspace, roleLabels, type Role } from "@/lib/permissions"
 
-const defaultRoleByWorkspace = {
-  customer: "customer",
-  bank: "bank_analyst",
-  admin: "admin",
-} as const
+const validRoles: Role[] = ["customer", "bank_analyst", "bank_manager", "admin"]
 
-export function DemoRouteGuard({ workspace, children }: { workspace: "customer" | "bank" | "admin"; children: ReactNode }) {
+function readStoredRole(): Role | null {
+  if (typeof window === "undefined") return null
+  const storedRole = localStorage.getItem("credai_role")
+  return validRoles.includes(storedRole as Role) ? storedRole as Role : null
+}
+
+function StoredRoleBadge() {
   const [role, setRole] = useState<Role | null>(null)
 
   useEffect(() => {
-    const storedRole = localStorage.getItem("credai_role") as Role | null
-    setRole(storedRole ?? defaultRoleByWorkspace[workspace])
-  }, [workspace])
+    setRole(readStoredRole())
+  }, [])
+
+  return <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">{role ? roleLabels[role] : "No role selected"}</span>
+}
+
+export function DemoRouteGuard({ workspace, children }: { workspace: "customer" | "bank" | "admin"; children: ReactNode }) {
+  const [role, setRole] = useState<Role | null>(null)
+  const [checked, setChecked] = useState(false)
+
+  useEffect(() => {
+    setRole(readStoredRole())
+    setChecked(true)
+  }, [])
+
+  if (!checked) {
+    return <div className="p-8 text-slate-200">Loading demo session...</div>
+  }
 
   if (!role) {
-    return <div className="p-8 text-slate-200">Loading demo session...</div>
+    return (
+      <div className="mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-6 text-center">
+        <div className="rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-200">
+          Demo login required
+        </div>
+        <h1 className="mt-6 text-3xl font-semibold text-white">Choose a demo role before opening this workspace.</h1>
+        <p className="mt-4 text-slate-300">
+          CredAI does not assign a default role. Sign in with one of the listed demo accounts so authorization behavior is explicit.
+        </p>
+        <Link href="/login" className="mt-6 rounded-xl bg-teal-400 px-5 py-3 text-sm font-semibold text-slate-950">
+          Open demo login
+        </Link>
+      </div>
+    )
   }
 
   if (!canAccessWorkspace(role, workspace)) {
@@ -57,7 +87,6 @@ export function WorkspaceShell({
   children: ReactNode
 }) {
   const pathname = usePathname()
-  const defaultRole = defaultRoleByWorkspace[workspace]
 
   return (
     <DemoRouteGuard workspace={workspace}>
@@ -72,7 +101,7 @@ export function WorkspaceShell({
           </Link>
           <div className="mt-6 flex flex-wrap gap-2">
             <span className="rounded-full border border-teal-300/40 bg-teal-300/10 px-3 py-1 text-xs font-semibold text-teal-100">Demo Mode</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">{roleLabels[defaultRole]}</span>
+            <StoredRoleBadge />
           </div>
           <nav className="mt-8 space-y-2" aria-label={`${workspace} navigation`}>
             {navItems.map((item) => {

@@ -1,7 +1,8 @@
 import type { ModelArtifact } from "./types"
 
 export const trainedModelArtifact: ModelArtifact = {
-  modelVersion: "logistic-demo-v1.0.0",
+  modelVersion: "logistic-demo-v1.1.0",
+  modelType: "Logistic regression",
   featureNames: [
     "utility_on_time_ratio",
     "utility_missed_payment_rate",
@@ -90,6 +91,28 @@ export const trainedModelArtifact: ModelArtifact = {
     account_age_months: 19,
     data_completeness: 0.12,
   },
+  imputationValues: {
+    utility_on_time_ratio: 0.71,
+    utility_missed_payment_rate: 0.08,
+    utility_amount_volatility: 0.28,
+    utility_observation_months: 10.8,
+    telecom_recharge_regularity: 0.7,
+    telecom_account_tenure_months: 48,
+    telecom_failed_payment_rate: 0.07,
+    wallet_inflow_regularity: 0.69,
+    wallet_outflow_volatility: 0.31,
+    wallet_balance_stability: 0.68,
+    wallet_failed_transaction_rate: 0.06,
+    bill_payment_consistency: 0.7,
+    simulated_repayment_ratio: 0.72,
+    simulated_days_late_average: 5.2,
+    cash_flow_coverage: 0.69,
+    income_stability: 0.7,
+    expense_volatility: 0.32,
+    negative_balance_days: 4.1,
+    account_age_months: 52,
+    data_completeness: 0.89,
+  },
   coefficients: {
     utility_on_time_ratio: 0.38,
     utility_missed_payment_rate: -0.24,
@@ -113,8 +136,11 @@ export const trainedModelArtifact: ModelArtifact = {
     data_completeness: 0.17,
   },
   intercept: 0.22,
+  threshold: 0.58,
   trainingRowCount: 1600,
   testRowCount: 400,
+  trainingPositiveRate: 0.61,
+  testPositiveRate: 0.615,
   seed: "credai-demo-v1",
   trainingTimestamp: "2026-08-26T09:00:00+05:00",
   metrics: {
@@ -135,5 +161,12 @@ export const trainedModelArtifact: ModelArtifact = {
     ],
   },
   labelDefinition: "Synthetic repayment success generated from repayment discipline, utility consistency, wallet stability, cash-flow coverage, tenure, and controlled noise.",
-  generatorVersion: "synthetic-generator-v1.0.0",
+  generatorVersion: "synthetic-generator-v1.1.0",
+  leakageSafeguards: [
+    "Final demo score is not included in model features.",
+    "simulated_repayment_success is used only as the training label.",
+    "synthetic_audit_group is excluded from model features and used only for diagnostics.",
+    "Normalization and imputation statistics are fit on the training split only.",
+  ],
+  artifactDigest: "bootstrap-artifact-run-npm-model-train",
 }
