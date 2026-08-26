@@ -90,6 +90,35 @@ export type ModelMetrics = {
   calibrationBins: Array<{ bin: string; predicted: number; observed: number; count: number }>
 }
 
+export type FairnessGroupDiagnostics = {
+  group: string
+  sampleSize: number
+  selectionRate: number
+  truePositiveRate: number
+  falsePositiveRate: number
+  averageScore: number
+  missingDataRate: number
+}
+
+export type EvaluationSnapshot = {
+  generatedAt: string
+  modelVersion: string
+  datasetSeed: string
+  generatorVersion: string
+  datasetRowCount: number
+  datasetEventCount: number
+  datasetMissingness: number
+  datasetDigest: string
+  threshold: number
+  testRowCount: number
+  fairnessDiagnostics: FairnessGroupDiagnostics[]
+  consistencyChecks: {
+    accuracyMatchesConfusionMatrix: boolean
+    calibrationCountMatchesTestRows: boolean
+  }
+  disclaimer: string
+}
+
 export function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value))
 }

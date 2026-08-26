@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from "node:fs"
 import { execFileSync } from "node:child_process"
-import { ARTIFACT_JSON_PATH, DATASET_PATH, FEATURES_PATH, THRESHOLD, deterministicSplit, evaluateRows, generateDataset, loadDataset, modelFeatureNames, sourceFeatureMap } from "./credai-ml-utils.mjs"
+import { ARTIFACT_JSON_PATH, DATASET_PATH, EVALUATION_SNAPSHOT_TS_PATH, FEATURES_PATH, THRESHOLD, deterministicSplit, evaluateRows, generateDataset, loadDataset, modelFeatureNames, sourceFeatureMap } from "./credai-ml-utils.mjs"
 
 const runJson = (args) => JSON.parse(execFileSync(process.execPath, args, { encoding: "utf8" }))
 
@@ -17,6 +17,8 @@ if (generated.actualRowCount !== 200) throw new Error("Generated output row coun
 const trained = runJson(["scripts/train-model.mjs"])
 if (!existsSync(ARTIFACT_JSON_PATH)) throw new Error("Training did not write an artifact JSON file")
 if (trained.modelVersion !== "logistic-demo-v1.1.0") throw new Error("Unexpected model version")
+if (!/^[0-9a-f]{64}$/.test(trained.artifactDigest)) throw new Error("Artifact digest is not a real SHA-256 hex value")
+if (!existsSync(EVALUATION_SNAPSHOT_TS_PATH)) throw new Error("Training did not write the evaluation snapshot")
 
 const dataset = loadDataset(DATASET_PATH)
 const artifact = loadDataset(ARTIFACT_JSON_PATH)
@@ -37,7 +39,11 @@ const expectedPrecision = Number((cm.truePositive / Math.max(1, cm.truePositive 
 if (evaluation.precision !== expectedPrecision) throw new Error("Precision and confusion matrix disagree")
 const expectedRecall = Number((cm.truePositive / Math.max(1, cm.truePositive + cm.falseNegative)).toFixed(4))
 if (evaluation.recall !== expectedRecall) throw new Error("Recall and confusion matrix disagree")
+const expectedF1 = expectedPrecision + expectedRecall ? Number(((2 * expectedPrecision * expectedRecall) / (expectedPrecision + expectedRecall)).toFixed(4)) : 0
+if (Math.abs(evaluation.f1 - expectedF1) > 0.0002) throw new Error("F1 is inconsistent with precision and recall")
 if (evaluation.accuracy < 0 || evaluation.accuracy > 1 || evaluation.rocAuc < 0 || evaluation.rocAuc > 1) throw new Error("Metric bounds are invalid")
+if (evaluation.brier < 0 || evaluation.brier > 1) throw new Error("Brier score is out of bounds")
+if (evaluation.calibrationBins.reduce((sum, bin) => sum + bin.count, 0) !== test.length) throw new Error("Calibration bins do not cover the test split")
 
 const thin = dataset.rows.find((row) => row.behaviorProfile === "thin_file" && !row.sourceAvailability.repayment)
 if (!thin) throw new Error("Expected a thin-file row with missing repayment source")
@@ -52,7 +58,26 @@ if (!evaluated.syntheticFairnessDiagnostics.length) throw new Error("Fairness di
 
 const portalPages = readFileSync("src/components/portal/PortalPages.tsx", "utf8")
 const workspaceShell = readFileSync("src/components/portal/WorkspaceShell.tsx", "utf8")
+const credaiData = readFileSync("src/lib/credai-data.ts", "utf8")
+const demoStore = readFileSync("src/lib/demo-store.ts", "utf8")
 if (workspaceShell.includes("defaultRoleByWorkspace")) throw new Error("Workspace shell still grants a default role")
 if (portalPages.includes("?? loanApplications[0]") || portalPages.includes("?? modelRegistry[1]")) throw new Error("Portal pages still contain silent unknown-ID fallbacks")
 
-console.log("CredAI deterministic data, training, evaluation, missingness, auth, fallback, and leakage checks passed")
+// Fairness diagnostics and dataset statistics must come from the computed snapshot, not static literals.
+if (!credaiData.includes("evaluationSnapshot.fairnessDiagnostics")) throw new Error("Fairness diagnostics are not sourced from the computed evaluation snapshot")
+if (!credaiData.includes("evaluationSnapshot.datasetRowCount")) throw new Error("Dataset summary is not sourced from the computed evaluation snapshot")
+const snapshotSource = readFileSync(EVALUATION_SNAPSHOT_TS_PATH, "utf8")
+if (!snapshotSource.includes("evaluationSnapshot")) throw new Error("Evaluation snapshot file is malformed")
+if (!snapshotSource.includes("Synthetic Region Group")) throw new Error("Evaluation snapshot is missing computed fairness groups")
+
+// Demo role authorization: stored roles must be validated and logout must clear the session.
+if (!workspaceShell.includes("validRoles.includes")) throw new Error("Stored role values are not validated against the known role list")
+if (!workspaceShell.includes("localStorage.removeItem")) throw new Error("Logout does not clear the stored demo session")
+
+// Loan decision state transitions must be centralized in the demo store.
+for (const transition of ["approve_for_demo\") return \"approved_for_demo\"", "decline_for_demo\") return \"declined_for_demo\""]) {
+  if (!demoStore.includes(transition)) throw new Error(`Decision state transition missing: ${transition}`)
+}
+if (!demoStore.includes("reason.length < 12")) throw new Error("Decision recording no longer validates the reviewer note")
+
+console.log("CredAI deterministic data, training, evaluation, missingness, auth, fallback, fairness-snapshot, and leakage checks passed")

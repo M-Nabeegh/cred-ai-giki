@@ -1,4 +1,4 @@
-import { ARTIFACT_JSON_PATH, ARTIFACT_TS_PATH, CREATED_AT, DATASET_PATH, MODEL_VERSION, SEED, THRESHOLD, artifactToTs, deterministicSplit, digest, ensureDir, evaluateRows, generateDataset, loadDataset, modelFeatureNames, trainLogisticModel, writeDataset } from "./credai-ml-utils.mjs"
+import { ARTIFACT_JSON_PATH, ARTIFACT_TS_PATH, CREATED_AT, DATASET_PATH, EVALUATION_SNAPSHOT_TS_PATH, MODEL_VERSION, SEED, THRESHOLD, artifactToTs, deterministicSplit, digest, ensureDir, evaluateRows, evaluationSnapshotToTs, fairnessDiagnostics, generateDataset, loadDataset, modelFeatureNames, trainLogisticModel, writeDataset } from "./credai-ml-utils.mjs"
 import { writeFileSync } from "node:fs"
 
 let dataset
@@ -39,6 +39,7 @@ const provisionalArtifact = {
 }
 const evaluation = evaluateRows(test, provisionalArtifact, THRESHOLD)
 const { scored, ...metrics } = evaluation
+const fairness = fairnessDiagnostics(scored, THRESHOLD)
 const artifact = {
   ...provisionalArtifact,
   trainingPositiveRate: Number(provisionalArtifact.trainingPositiveRate.toFixed(4)),
@@ -51,6 +52,26 @@ ensureDir(ARTIFACT_JSON_PATH)
 writeFileSync(ARTIFACT_JSON_PATH, `${JSON.stringify(artifact, null, 2)}\n`)
 writeFileSync(ARTIFACT_TS_PATH, artifactToTs(artifact))
 
+const evaluationSnapshot = {
+  generatedAt: CREATED_AT,
+  modelVersion: artifact.modelVersion,
+  datasetSeed: dataset.metadata.seed,
+  generatorVersion: dataset.metadata.generatorVersion,
+  datasetRowCount: dataset.metadata.actualRowCount,
+  datasetEventCount: dataset.metadata.actualEventCount,
+  datasetMissingness: dataset.metadata.actualMissingness,
+  datasetDigest: dataset.metadata.deterministicDigest,
+  threshold: THRESHOLD,
+  testRowCount: test.length,
+  fairnessDiagnostics: fairness,
+  consistencyChecks: {
+    accuracyMatchesConfusionMatrix: metrics.accuracy === Number(((metrics.confusionMatrix.truePositive + metrics.confusionMatrix.trueNegative) / test.length).toFixed(4)),
+    calibrationCountMatchesTestRows: metrics.calibrationBins.reduce((sum, bin) => sum + bin.count, 0) === test.length,
+  },
+  disclaimer: "Synthetic evaluation only. These results do not establish real-world lending accuracy, fairness, or regulatory suitability.",
+}
+writeFileSync(EVALUATION_SNAPSHOT_TS_PATH, evaluationSnapshotToTs(evaluationSnapshot))
+
 console.log(JSON.stringify({
   artifactPath: ARTIFACT_JSON_PATH,
   typescriptArtifactPath: ARTIFACT_TS_PATH,
@@ -58,6 +79,7 @@ console.log(JSON.stringify({
   trainingRowCount: artifact.trainingRowCount,
   testRowCount: artifact.testRowCount,
   artifactDigest: artifact.artifactDigest,
+  evaluationSnapshotPath: EVALUATION_SNAPSHOT_TS_PATH,
   metrics: artifact.metrics,
   note: "Synthetic evaluation only. These results do not establish real-world lending accuracy, fairness, or regulatory suitability.",
 }, null, 2))

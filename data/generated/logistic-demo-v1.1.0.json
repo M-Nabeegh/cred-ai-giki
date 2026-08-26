@@ -1,6 +1,4 @@
-import type { ModelArtifact } from "./types"
-
-export const trainedModelArtifact: ModelArtifact = {
+{
   "modelVersion": "logistic-demo-v1.1.0",
   "modelType": "Logistic regression",
   "seed": "credai-demo-v1",

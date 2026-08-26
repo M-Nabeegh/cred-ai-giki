@@ -4,8 +4,8 @@ const dataset = loadDataset(DATASET_PATH)
 const artifact = loadDataset(ARTIFACT_JSON_PATH)
 const { test } = deterministicSplit(dataset.rows)
 const evaluation = evaluateRows(test, artifact, artifact.threshold ?? THRESHOLD)
-const fairness = fairnessDiagnostics(evaluation.scored, artifact.threshold ?? THRESHOLD)
 const { scored, ...metrics } = evaluation
+const fairness = fairnessDiagnostics(scored, artifact.threshold ?? THRESHOLD)
 
 console.log(JSON.stringify({
   modelVersion: artifact.modelVersion,
