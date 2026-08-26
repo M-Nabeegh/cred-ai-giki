@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/test.mjs",
+    "data:generate": "node scripts/generate-synthetic-data.mjs",
+    "model:train": "node scripts/train-model.mjs",
+    "model:evaluate": "node scripts/evaluate-model.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
