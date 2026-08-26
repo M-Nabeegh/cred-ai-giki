@@ -1,8 +1,9 @@
 import { calculateBaselineScore } from "./scoring/baseline"
+import { evaluationSnapshot } from "./scoring/evaluation-snapshot"
 import { inferLogisticScore } from "./scoring/logistic"
 import { activeModelArtifact, modelRegistry } from "./scoring/model-registry"
 import type { Role } from "./permissions"
-import type { ModelMetrics, ScoreResult } from "./scoring/types"
+import type { FairnessGroupDiagnostics, ModelMetrics, ScoreResult } from "./scoring/types"
 
 export const DEMO_SEED = "credai-demo-v1"
 export const GENERATOR_VERSION = "synthetic-generator-v1.1.0"
@@ -104,15 +105,7 @@ export type Organization = {
   activeUsers: number
 }
 
-export type FairnessGroup = {
-  group: string
-  sampleSize: number
-  selectionRate: number
-  truePositiveRate: number
-  falsePositiveRate: number
-  averageScore: number
-  missingDataRate: number
-}
+export type FairnessGroup = FairnessGroupDiagnostics
 
 export type SyntheticDatasetSummary = {
   seed: string
@@ -124,6 +117,8 @@ export type SyntheticDatasetSummary = {
   missingDataRate: number
   noiseLevel: number
   labelGenerationMethod: string
+  digest: string
+  observationMonths: number
 }
 
 export function createSeededRandom(seed: string) {
@@ -298,23 +293,22 @@ export const auditEvents: AuditEvent[] = [
   { id: "audit-005", actorId: "demo-customer-001", organization: "CredAI", role: "customer", action: "Consent revoked", resource: "simulated-jazzcash", modelVersion: activeModelArtifact.modelVersion, timestamp: "2026-08-24T15:25:00+05:00", result: "warning" },
 ]
 
-export const fairnessDiagnostics: FairnessGroup[] = [
-  { group: "Synthetic Region Group A", sampleSize: 510, selectionRate: 0.62, truePositiveRate: 0.74, falsePositiveRate: 0.18, averageScore: 681, missingDataRate: 0.06 },
-  { group: "Synthetic Region Group B", sampleSize: 492, selectionRate: 0.58, truePositiveRate: 0.7, falsePositiveRate: 0.2, averageScore: 664, missingDataRate: 0.08 },
-  { group: "Synthetic Region Group C", sampleSize: 498, selectionRate: 0.6, truePositiveRate: 0.72, falsePositiveRate: 0.19, averageScore: 672, missingDataRate: 0.07 },
-  { group: "Synthetic Region Group D", sampleSize: 500, selectionRate: 0.57, truePositiveRate: 0.69, falsePositiveRate: 0.21, averageScore: 658, missingDataRate: 0.1 },
-]
+// Computed by scripts/train-model.mjs from actual test-split predictions grouped by synthetic_audit_group.
+export const fairnessDiagnostics: FairnessGroup[] = evaluationSnapshot.fairnessDiagnostics
 
+// Measured values written by the generation/training pipeline; not hand-authored.
 export const datasetSummary: SyntheticDatasetSummary = {
-  seed: DEMO_SEED,
-  generatorVersion: GENERATOR_VERSION,
-  createdAt: DEMO_TIMESTAMP,
-  profileCount: 2000,
-  eventCount: 2000 * 12 * 6,
+  seed: evaluationSnapshot.datasetSeed,
+  generatorVersion: evaluationSnapshot.generatorVersion,
+  createdAt: evaluationSnapshot.generatedAt,
+  profileCount: evaluationSnapshot.datasetRowCount,
+  eventCount: evaluationSnapshot.datasetEventCount,
   enabledSources: Object.keys(sourceFeatureMap),
-  missingDataRate: rounded(syntheticProfiles.reduce((sum, profile) => sum + (1 - profile.score.dataCoverage / 100), 0) / syntheticProfiles.length, 4),
+  missingDataRate: evaluationSnapshot.datasetMissingness,
   noiseLevel: 0.12,
   labelGenerationMethod: "Latent repayment-success process using consistency, stability, tenure, coverage, and controlled noise.",
+  digest: evaluationSnapshot.datasetDigest,
+  observationMonths: Math.round(evaluationSnapshot.datasetEventCount / Math.max(1, evaluationSnapshot.datasetRowCount) / Object.keys(sourceFeatureMap).length),
 }
 
 export const modelMetrics: ModelMetrics = activeModelArtifact.metrics
