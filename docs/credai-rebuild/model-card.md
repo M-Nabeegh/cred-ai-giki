@@ -22,13 +22,26 @@ Model-eligible features include utility payment ratios, telecom regularity, wall
 Religion, ethnicity, gender, marital status, political affiliation, contact-list contents, SMS text, message sentiment, social-media content, exact GPS history, device fingerprint, protected personal characteristics, and proxy features designed to infer protected characteristics are excluded.
 
 ## Training process
-The training script generates deterministic synthetic rows, performs a deterministic train/test split, fits normalization on the training set only, trains a small logistic regression model, and writes a versioned artifact for browser inference.
+The training script generates 2000 deterministic synthetic rows from seed `credai-demo-v1` (144,000 monthly observations, measured missingness ≈ 8.2%), performs a deterministic digest-ordered 80/20 train/test split (1600 train / 400 test), fits normalization statistics on the training rows only, trains a small logistic regression model with full-batch gradient descent (learning rate 0.08, 900 iterations, L2 0.001), and writes a versioned artifact (`logistic-demo-v1.1.0`) for browser inference. Positive-label rate: 0.6894 train / 0.72 test. Decision threshold: 0.58. A browser-side port of the same pipeline (`src/lib/scoring/browser-pipeline.ts`) lets the admin UI regenerate data, retrain a smaller model, and recompute evaluation without leaving the demo; those runs are clearly labeled local-only and never replace the checked-in artifact.
 
 ## Metrics
-Evaluation reports accuracy, precision, recall, F1, ROC-AUC, Brier score, confusion matrix, calibration bins, train/test sizes, model version, seed, and positive-label rate. Synthetic metrics do not prove real-world lending performance.
+Measured on the held-out 400-row test split of the checked-in artifact:
+
+| Metric | Value |
+| --- | --- |
+| Accuracy | 0.885 |
+| Precision | 0.9549 |
+| Recall | 0.8819 |
+| F1 | 0.917 |
+| ROC-AUC | 0.9612 |
+| Brier score | 0.0742 |
+| Confusion matrix | TP 254 / FP 12 / TN 100 / FN 34 |
+| Artifact digest (SHA-256) | `dd998daa0d71ab02426f4876528ce1c9b6eb3a2207fc9362d89dd02f7e686de1` |
+
+Calibration bins and consistency checks (accuracy vs. confusion matrix, calibration coverage vs. test rows) are reported by `npm run model:evaluate`. Synthetic metrics do not prove real-world lending performance.
 
 ## Fairness audit
-Synthetic audit groups are generated for diagnostic evaluation only and are not fed into the model. The fairness page and evaluation script report group sample size, selection rate, true-positive rate, false-positive rate, average score, and missing-data rate.
+Synthetic audit groups are generated for diagnostic evaluation only and are not fed into the model. Fairness diagnostics are computed from actual test-split predictions grouped by `synthetic_audit_group` and persisted in the generated `src/lib/scoring/evaluation-snapshot.ts`; the UI renders that snapshot rather than any static numbers. Per group the snapshot reports sample size, selection rate, true-positive rate, false-positive rate, average score, and missing-data rate.
 
 ## Limitations
 - Synthetic data cannot validate real predictive performance.

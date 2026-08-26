@@ -47,10 +47,10 @@ flowchart LR
 
 Key files:
 
-- `src/lib/credai-data.ts` — deterministic synthetic profiles, source-to-feature consent mapping, applications, audit events, dataset summary, and formatting helpers.
-- `src/lib/demo-store.ts` — browser-local typed demo workflow state for consent toggles, loan submissions, review decisions, and audit events.
+- `src/lib/credai-data.ts` — deterministic synthetic profiles, source-to-feature consent mapping, applications, audit events, dataset summary, and formatting helpers. Fairness diagnostics and dataset summary are sourced from the generated evaluation snapshot, not static literals.
+- `src/lib/demo-store.ts` — browser-local typed demo workflow state for consent toggles, loan submissions, review decisions, model publish/rollback, browser training records, and audit events. Includes JSON/CSV export helpers.
 - `src/lib/permissions.ts` — central role and permission map for customer, bank analyst, bank manager, and admin roles.
-- `src/lib/scoring/` — feature definitions, baseline score, logistic inference, explanations, model registry, and checked-in artifact.
+- `src/lib/scoring/` — feature definitions, baseline score, logistic inference, explanations, model registry, checked-in trained artifact, a generated evaluation snapshot, and a browser-side pipeline port (`browser-pipeline.ts`) used by admin generate/train/evaluate panels.
 - `src/components/portal/` — public marketing pages, portal shells, score cards, dashboard panels, application tables, and admin views.
 - `scripts/` — reproducible synthetic-data, model-training, model-evaluation, and deterministic test commands.
 - `docs/credai-rebuild/` — discovery, product, architecture, data dictionary, model card, demo accounts, compliance notes, and QA checklist.
@@ -67,7 +67,7 @@ CredAI includes two scoring paths:
    - General financial stability: 15%
    - Account tenure: 5%
    - Data completeness: 5%
-2. Small logistic regression artifact for `simulated_repayment_success`, trained only on synthetic features and mapped to the 300–850 demo score range. The reproducible training command writes `data/generated/logistic-demo-v1.1.0.json` and refreshes `src/lib/scoring/model-artifact.ts`.
+2. Small logistic regression artifact (`logistic-demo-v1.1.0`) for `simulated_repayment_success`, trained only on synthetic features and mapped to the 300–850 demo score range. `npm run data:generate` writes a deterministic 2000-profile dataset (seed `credai-demo-v1`), `npm run model:train` performs an 80/20 digest-ordered split, fits normalization on the training rows only, runs full-batch gradient descent, and writes `data/generated/logistic-demo-v1.1.0.json` plus refreshed `src/lib/scoring/model-artifact.ts` and `src/lib/scoring/evaluation-snapshot.ts`. The checked-in artifact reports test accuracy 0.885, ROC-AUC 0.9612, and Brier 0.0742 over 400 held-out rows; see `docs/credai-rebuild/model-card.md` for full numbers and the artifact digest.
 
 Disconnected demo sources null their mapped features, reduce coverage, and emit missing-data warnings through logistic imputation. Demo workspaces require an explicit local demo login; they no longer assign a default role when local storage is empty.
 
@@ -91,7 +91,7 @@ npm run build
 
 ## Verification notes
 
-The Qoder shell used during this rebuild did not expose `node` or `npm` on PATH, so npm commands may need to be run in a local terminal with Node.js installed. `git diff --check` is used for whitespace validation when npm is unavailable. Browser workflow actions persist only in localStorage and are resettable from the customer/admin settings views.
+All checks were run with Node.js v22 (nvm) and pass: `npm run lint`, `npm run typecheck`, `npm run test`, `npm run data:generate`, `npm run model:train`, `npm run model:evaluate`, and `npm run build`. Note that `npm run test` regenerates a smaller 200-row dataset and retrains; run `data:generate`, `model:train`, and `model:evaluate` afterwards to restore the full 2000-row state. The full dataset JSON is git-ignored because it is regenerable from the seed; the features CSV and the trained model artifact are committed. Browser workflow actions persist only in localStorage and are resettable from the customer/admin settings views.
 
 ## Production work still required
 

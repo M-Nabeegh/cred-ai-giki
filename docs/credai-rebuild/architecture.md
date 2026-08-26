@@ -6,10 +6,12 @@ CredAI remains a self-contained Next.js App Router prototype. The rebuild introd
 ## Proposed module layout
 - `src/app/` — route entry points and compatibility redirects.
 - `src/components/portal/` — reusable portal shell, cards, badges, tables, charts, score visuals, and route views.
-- `src/lib/credai-data.ts` — deterministic synthetic profiles, applications, organizations, audit events, source status, and model metadata.
+- `src/lib/credai-data.ts` — deterministic synthetic profiles, applications, organizations, audit events, source status, and model metadata. Fairness diagnostics and dataset summary come from the generated evaluation snapshot.
+- `src/lib/demo-store.ts` — typed localStorage-backed demo state (consent, applications, decisions, publish/rollback, browser training records) built on `useSyncExternalStore`.
 - `src/lib/permissions.ts` — central role and permission map.
-- `src/lib/scoring/` — feature metadata, baseline model, logistic artifact inference, explanations, model registry, and shared types.
-- `scripts/` — deterministic data generation, model training, and evaluation scripts.
+- `src/lib/scoring/` — feature metadata, baseline model, logistic artifact inference, explanations, model registry, the checked-in trained artifact, the generated `evaluation-snapshot.ts`, and `browser-pipeline.ts` (in-browser generate/train/evaluate port used by admin panels).
+- `scripts/` — deterministic data generation, model training (also writes the evaluation snapshot), evaluation, and test scripts.
+- `data/generated/` — reproducible pipeline outputs. The features CSV and trained model artifact are committed; the full dataset JSON is git-ignored because `npm run data:generate` reproduces it byte-for-byte from seed `credai-demo-v1`.
 - `docs/credai-rebuild/` — product, data, model, compliance, QA, and discovery documentation.
 
 ## Client and server boundaries
@@ -22,7 +24,7 @@ A central permission map defines capabilities for `customer`, `bank_analyst`, `b
 Synthetic data is deterministic from seed `credai-demo-v1`. Customer profiles include fake names, masked identifiers, role associations, 12-month observations, simulated data-source status, feature snapshots, demo scores, loan applications, decisions, model versions, and audit events.
 
 ## Scoring architecture
-The transparent baseline model uses versioned category weights. Features are normalized and direction-aware. The learned model is a small logistic regression artifact trained only on synthetic labels for simulated repayment success. If no learned artifact is available, the UI identifies the baseline model as active.
+The transparent baseline model uses versioned category weights. Features are normalized and direction-aware. The learned model is the `logistic-demo-v1.1.0` logistic regression artifact trained on synthetic labels for simulated repayment success; inference loads the checked-in artifact. The training script also writes `src/lib/scoring/evaluation-snapshot.ts` containing fairness diagnostics computed from actual test-split predictions plus dataset provenance (row count, event count, measured missingness, dataset digest), which the UI renders directly. Admin publish/rollback actions switch the active model locally between the trained artifact and the transparent baseline. If no learned artifact is available, the UI identifies the baseline model as active.
 
 ## Deployment
 The app continues to use the existing Vercel/Next.js deployment setup. No external database, credential file, or real integration is introduced.
