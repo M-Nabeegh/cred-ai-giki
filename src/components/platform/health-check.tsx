@@ -5,23 +5,33 @@ import { RefreshCw } from "lucide-react"
 import type { ProviderHealth } from "@/lib/data/types"
 import { Badge, Button } from "../ui"
 
+async function fetchHealth(): Promise<ProviderHealth> {
+  try {
+    const response = await fetch("/api/v1/health", { cache: "no-store" })
+    return ((await response.json()) as { data: ProviderHealth }).data
+  } catch {
+    return { ok: false, provider: "unknown", detail: "Could not reach /api/v1/health", latencyMs: 0, customers: 0, rejected: 0 }
+  }
+}
+
 export function HealthCheck() {
   const [health, setHealth] = useState<ProviderHealth | null>(null)
-  const [busy, setBusy] = useState(false)
+  const [busy, setBusy] = useState(true)
   const [checkedAt, setCheckedAt] = useState<string | null>(null)
-  const run = useCallback(async () => {
-    setBusy(true)
-    try {
-      const response = await fetch("/api/v1/health", { cache: "no-store" })
-      setHealth(((await response.json()) as { data: ProviderHealth }).data)
-    } catch {
-      setHealth({ ok: false, provider: "unknown", detail: "Could not reach /api/v1/health", latencyMs: 0, customers: 0, rejected: 0 })
-    } finally {
-      setCheckedAt(new Date().toLocaleTimeString())
-      setBusy(false)
-    }
+  const apply = useCallback((next: ProviderHealth) => {
+    setHealth(next)
+    setCheckedAt(new Date().toLocaleTimeString())
+    setBusy(false)
   }, [])
-  useEffect(() => { void run() }, [run])
+  const run = () => {
+    setBusy(true)
+    void fetchHealth().then(apply)
+  }
+  useEffect(() => {
+    let active = true
+    void fetchHealth().then((next) => active && apply(next))
+    return () => { active = false }
+  }, [apply])
 
   return (
     <div>
