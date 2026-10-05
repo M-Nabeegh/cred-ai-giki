@@ -1,0 +1,814 @@
+{
+  "modelVersion": "credai-scorecard-2.0.0",
+  "dataset": {
+    "seed": "credai-v2",
+    "asOf": "2026-09-30",
+    "rows": 4000,
+    "trainRows": 3173,
+    "testRows": 827,
+    "positiveRate": 0.7465,
+    "personaMix": [
+      {
+        "persona": "salaried",
+        "label": "Salaried employee",
+        "share": 0.245,
+        "repaidRate": 0.953
+      },
+      {
+        "persona": "gig",
+        "label": "Ride-hailing & delivery",
+        "share": 0.196,
+        "repaidRate": 0.681
+      },
+      {
+        "persona": "merchant",
+        "label": "Small shop owner",
+        "share": 0.151,
+        "repaidRate": 0.851
+      },
+      {
+        "persona": "freelancer",
+        "label": "Freelancer",
+        "share": 0.116,
+        "repaidRate": 0.84
+      },
+      {
+        "persona": "student",
+        "label": "Student or first job",
+        "share": 0.136,
+        "repaidRate": 0.58
+      },
+      {
+        "persona": "stretched",
+        "label": "Over-extended household",
+        "share": 0.157,
+        "repaidRate": 0.481
+      }
+    ],
+    "sourceAvailability": {
+      "utility": 0.883,
+      "telecom": 1,
+      "wallet": 0.887,
+      "bank": 0.647,
+      "credit": 0.405
+    },
+    "transactions": 1377742
+  },
+  "metrics": {
+    "auc": 0.7828,
+    "gini": 0.5656,
+    "ks": 0.478,
+    "brier": 0.1438,
+    "logLoss": 0.4415,
+    "accuracy": 0.6723,
+    "precision": 0.9268,
+    "recall": 0.6289,
+    "approvalRate": 0.5284,
+    "badRateApproved": 0.0732,
+    "badRateDeclined": 0.3872
+  },
+  "threshold": {
+    "score": 660,
+    "probability": 0.7751
+  },
+  "confusion": {
+    "approvedRepaid": 405,
+    "approvedDefaulted": 32,
+    "declinedRepaid": 239,
+    "declinedDefaulted": 151
+  },
+  "roc": [
+    {
+      "fpr": 0,
+      "tpr": 0
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.0109
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.0171
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.0342
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.0497
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.0683
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.0823
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.0932
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.118
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.1537
+    },
+    {
+      "fpr": 0,
+      "tpr": 0.1863
+    },
+    {
+      "fpr": 0.0055,
+      "tpr": 0.2174
+    },
+    {
+      "fpr": 0.0219,
+      "tpr": 0.2516
+    },
+    {
+      "fpr": 0.0328,
+      "tpr": 0.2888
+    },
+    {
+      "fpr": 0.0492,
+      "tpr": 0.3245
+    },
+    {
+      "fpr": 0.0546,
+      "tpr": 0.3556
+    },
+    {
+      "fpr": 0.071,
+      "tpr": 0.3944
+    },
+    {
+      "fpr": 0.0984,
+      "tpr": 0.4457
+    },
+    {
+      "fpr": 0.1202,
+      "tpr": 0.5078
+    },
+    {
+      "fpr": 0.1421,
+      "tpr": 0.5652
+    },
+    {
+      "fpr": 0.1749,
+      "tpr": 0.6289
+    },
+    {
+      "fpr": 0.1913,
+      "tpr": 0.6693
+    },
+    {
+      "fpr": 0.2459,
+      "tpr": 0.6972
+    },
+    {
+      "fpr": 0.3388,
+      "tpr": 0.7438
+    },
+    {
+      "fpr": 0.4098,
+      "tpr": 0.7888
+    },
+    {
+      "fpr": 0.4809,
+      "tpr": 0.8276
+    },
+    {
+      "fpr": 0.5683,
+      "tpr": 0.854
+    },
+    {
+      "fpr": 0.623,
+      "tpr": 0.896
+    },
+    {
+      "fpr": 0.6831,
+      "tpr": 0.913
+    },
+    {
+      "fpr": 0.7322,
+      "tpr": 0.9317
+    },
+    {
+      "fpr": 0.7705,
+      "tpr": 0.9534
+    },
+    {
+      "fpr": 0.8197,
+      "tpr": 0.9658
+    },
+    {
+      "fpr": 0.8689,
+      "tpr": 0.972
+    },
+    {
+      "fpr": 0.8907,
+      "tpr": 0.9798
+    },
+    {
+      "fpr": 0.918,
+      "tpr": 0.9938
+    },
+    {
+      "fpr": 0.9563,
+      "tpr": 0.9953
+    },
+    {
+      "fpr": 0.9781,
+      "tpr": 0.9969
+    },
+    {
+      "fpr": 0.9781,
+      "tpr": 0.9984
+    },
+    {
+      "fpr": 0.9891,
+      "tpr": 0.9984
+    },
+    {
+      "fpr": 0.9945,
+      "tpr": 0.9984
+    },
+    {
+      "fpr": 1,
+      "tpr": 0.9984
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "fpr": 1,
+      "tpr": 1
+    }
+  ],
+  "calibration": [
+    {
+      "bin": "10–20%",
+      "predicted": 0.178,
+      "observed": 0.5,
+      "count": 2
+    },
+    {
+      "bin": "20–30%",
+      "predicted": 0.264,
+      "observed": 0.222,
+      "count": 9
+    },
+    {
+      "bin": "30–40%",
+      "predicted": 0.352,
+      "observed": 0.441,
+      "count": 34
+    },
+    {
+      "bin": "40–50%",
+      "predicted": 0.453,
+      "observed": 0.52,
+      "count": 50
+    },
+    {
+      "bin": "50–60%",
+      "predicted": 0.557,
+      "observed": 0.638,
+      "count": 80
+    },
+    {
+      "bin": "60–70%",
+      "predicted": 0.653,
+      "observed": 0.632,
+      "count": 125
+    },
+    {
+      "bin": "70–80%",
+      "predicted": 0.755,
+      "observed": 0.776,
+      "count": 143
+    },
+    {
+      "bin": "80–90%",
+      "predicted": 0.849,
+      "observed": 0.901,
+      "count": 192
+    },
+    {
+      "bin": "90–100%",
+      "predicted": 0.941,
+      "observed": 0.969,
+      "count": 192
+    }
+  ],
+  "scoreDistribution": [
+    {
+      "bucket": 300,
+      "repaid": 0,
+      "defaulted": 0
+    },
+    {
+      "bucket": 350,
+      "repaid": 0,
+      "defaulted": 0
+    },
+    {
+      "bucket": 400,
+      "repaid": 0,
+      "defaulted": 0
+    },
+    {
+      "bucket": 450,
+      "repaid": 2,
+      "defaulted": 4
+    },
+    {
+      "bucket": 500,
+      "repaid": 20,
+      "defaulted": 29
+    },
+    {
+      "bucket": 550,
+      "repaid": 72,
+      "defaulted": 46
+    },
+    {
+      "bucket": 600,
+      "repaid": 119,
+      "defaulted": 69
+    },
+    {
+      "bucket": 650,
+      "repaid": 177,
+      "defaulted": 22
+    },
+    {
+      "bucket": 700,
+      "repaid": 114,
+      "defaulted": 12
+    },
+    {
+      "bucket": 750,
+      "repaid": 87,
+      "defaulted": 1
+    },
+    {
+      "bucket": 800,
+      "repaid": 46,
+      "defaulted": 0
+    },
+    {
+      "bucket": 850,
+      "repaid": 7,
+      "defaulted": 0
+    }
+  ],
+  "cutoffs": [
+    {
+      "score": 480,
+      "approvalRate": 0.9964,
+      "badRate": 0.2197
+    },
+    {
+      "score": 490,
+      "approvalRate": 0.994,
+      "badRate": 0.2178
+    },
+    {
+      "score": 500,
+      "approvalRate": 0.9927,
+      "badRate": 0.218
+    },
+    {
+      "score": 510,
+      "approvalRate": 0.9867,
+      "badRate": 0.2145
+    },
+    {
+      "score": 520,
+      "approvalRate": 0.977,
+      "badRate": 0.2079
+    },
+    {
+      "score": 530,
+      "approvalRate": 0.9601,
+      "badRate": 0.2053
+    },
+    {
+      "score": 540,
+      "approvalRate": 0.9492,
+      "badRate": 0.2025
+    },
+    {
+      "score": 550,
+      "approvalRate": 0.9335,
+      "badRate": 0.1943
+    },
+    {
+      "score": 560,
+      "approvalRate": 0.9129,
+      "badRate": 0.1868
+    },
+    {
+      "score": 570,
+      "approvalRate": 0.8875,
+      "badRate": 0.1826
+    },
+    {
+      "score": 580,
+      "approvalRate": 0.8622,
+      "badRate": 0.1753
+    },
+    {
+      "score": 590,
+      "approvalRate": 0.8356,
+      "badRate": 0.165
+    },
+    {
+      "score": 600,
+      "approvalRate": 0.7908,
+      "badRate": 0.159
+    },
+    {
+      "score": 610,
+      "approvalRate": 0.7509,
+      "badRate": 0.1417
+    },
+    {
+      "score": 620,
+      "approvalRate": 0.705,
+      "badRate": 0.1286
+    },
+    {
+      "score": 630,
+      "approvalRate": 0.6542,
+      "badRate": 0.1146
+    },
+    {
+      "score": 640,
+      "approvalRate": 0.5973,
+      "badRate": 0.0911
+    },
+    {
+      "score": 650,
+      "approvalRate": 0.5635,
+      "badRate": 0.0751
+    },
+    {
+      "score": 660,
+      "approvalRate": 0.5284,
+      "badRate": 0.0732
+    },
+    {
+      "score": 670,
+      "approvalRate": 0.4716,
+      "badRate": 0.0667
+    },
+    {
+      "score": 680,
+      "approvalRate": 0.422,
+      "badRate": 0.063
+    },
+    {
+      "score": 690,
+      "approvalRate": 0.3688,
+      "badRate": 0.059
+    },
+    {
+      "score": 700,
+      "approvalRate": 0.3229,
+      "badRate": 0.0487
+    },
+    {
+      "score": 710,
+      "approvalRate": 0.289,
+      "badRate": 0.0418
+    },
+    {
+      "score": 720,
+      "approvalRate": 0.2636,
+      "badRate": 0.0413
+    },
+    {
+      "score": 730,
+      "approvalRate": 0.2322,
+      "badRate": 0.0313
+    },
+    {
+      "score": 740,
+      "approvalRate": 0.2007,
+      "badRate": 0.0241
+    },
+    {
+      "score": 750,
+      "approvalRate": 0.1705,
+      "badRate": 0.0071
+    },
+    {
+      "score": 760,
+      "approvalRate": 0.1451,
+      "badRate": 0
+    },
+    {
+      "score": 770,
+      "approvalRate": 0.1197,
+      "badRate": 0
+    },
+    {
+      "score": 780,
+      "approvalRate": 0.0919,
+      "badRate": 0
+    },
+    {
+      "score": 790,
+      "approvalRate": 0.0726,
+      "badRate": 0
+    },
+    {
+      "score": 800,
+      "approvalRate": 0.0641,
+      "badRate": 0
+    },
+    {
+      "score": 810,
+      "approvalRate": 0.0532,
+      "badRate": 0
+    },
+    {
+      "score": 820,
+      "approvalRate": 0.0387,
+      "badRate": 0
+    },
+    {
+      "score": 830,
+      "approvalRate": 0.0266,
+      "badRate": 0
+    }
+  ],
+  "gradeTable": [
+    {
+      "grade": "A",
+      "count": 166,
+      "badRate": 0.024
+    },
+    {
+      "grade": "B",
+      "count": 183,
+      "badRate": 0.098
+    },
+    {
+      "grade": "C",
+      "count": 234,
+      "badRate": 0.226
+    },
+    {
+      "grade": "D",
+      "count": 172,
+      "badRate": 0.384
+    },
+    {
+      "grade": "E",
+      "count": 72,
+      "badRate": 0.583
+    }
+  ],
+  "fairness": [
+    {
+      "group": "North",
+      "count": 157,
+      "approvalRate": 0.548,
+      "averageScore": 672,
+      "tpr": 0.642,
+      "fpr": 0.206,
+      "thinFileShare": 0.083,
+      "adverseImpactRatio": 0.955
+    },
+    {
+      "group": "Central",
+      "count": 326,
+      "approvalRate": 0.509,
+      "averageScore": 660,
+      "tpr": 0.61,
+      "fpr": 0.153,
+      "thinFileShare": 0.064,
+      "adverseImpactRatio": 0.887
+    },
+    {
+      "group": "South",
+      "count": 176,
+      "approvalRate": 0.574,
+      "averageScore": 672,
+      "tpr": 0.674,
+      "fpr": 0.244,
+      "thinFileShare": 0.045,
+      "adverseImpactRatio": 1
+    },
+    {
+      "group": "West",
+      "count": 168,
+      "approvalRate": 0.5,
+      "averageScore": 669,
+      "tpr": 0.606,
+      "fpr": 0.111,
+      "thinFileShare": 0.113,
+      "adverseImpactRatio": 0.871
+    }
+  ],
+  "ablation": [
+    {
+      "source": "utility",
+      "aucWithout": 0.7484,
+      "aucDrop": 0.0344
+    },
+    {
+      "source": "telecom",
+      "aucWithout": 0.7726,
+      "aucDrop": 0.0102
+    },
+    {
+      "source": "wallet",
+      "aucWithout": 0.78,
+      "aucDrop": 0.0028
+    },
+    {
+      "source": "bank",
+      "aucWithout": 0.7429,
+      "aucDrop": 0.0399
+    },
+    {
+      "source": "credit",
+      "aucWithout": 0.7847,
+      "aucDrop": -0.0019
+    }
+  ],
+  "coefficients": [
+    {
+      "key": "utility_on_time_ratio",
+      "label": "Utility bills paid on time",
+      "source": "utility",
+      "weight": 0.585257
+    },
+    {
+      "key": "telecom_tenure_months",
+      "label": "Mobile number age",
+      "source": "telecom",
+      "weight": 0.344895
+    },
+    {
+      "key": "expense_volatility",
+      "label": "Spending volatility",
+      "source": "bank",
+      "weight": -0.221674
+    },
+    {
+      "key": "negative_balance_days",
+      "label": "Overdrawn days",
+      "source": "bank",
+      "weight": -0.208211
+    },
+    {
+      "key": "repayment_on_time_ratio",
+      "label": "Instalments paid on time",
+      "source": "credit",
+      "weight": 0.203479
+    },
+    {
+      "key": "buffer_months",
+      "label": "Savings buffer",
+      "source": "bank",
+      "weight": 0.196785
+    },
+    {
+      "key": "telecom_active_ratio",
+      "label": "Mobile account activity",
+      "source": "telecom",
+      "weight": 0.174049
+    },
+    {
+      "key": "data_coverage",
+      "label": "Data sources connected",
+      "source": "profile",
+      "weight": 0.166705
+    },
+    {
+      "key": "cash_flow_coverage",
+      "label": "Income covers spending",
+      "source": "bank",
+      "weight": 0.133737
+    },
+    {
+      "key": "wallet_buffer_ratio",
+      "label": "Wallet balance cushion",
+      "source": "wallet",
+      "weight": 0.12517
+    },
+    {
+      "key": "repayment_avg_days_late",
+      "label": "Days late on instalments",
+      "source": "credit",
+      "weight": -0.074471
+    },
+    {
+      "key": "telecom_failed_rate",
+      "label": "Failed mobile payments",
+      "source": "telecom",
+      "weight": -0.068253
+    },
+    {
+      "key": "utility_unpaid_ratio",
+      "label": "Utility bills left unpaid",
+      "source": "utility",
+      "weight": -0.062159
+    },
+    {
+      "key": "utility_months_observed",
+      "label": "Utility history length",
+      "source": "utility",
+      "weight": 0
+    },
+    {
+      "key": "wallet_active_ratio",
+      "label": "Wallet income regularity",
+      "source": "wallet",
+      "weight": 0
+    },
+    {
+      "key": "wallet_failed_rate",
+      "label": "Failed wallet payments",
+      "source": "wallet",
+      "weight": 0
+    },
+    {
+      "key": "income_regularity",
+      "label": "Income regularity",
+      "source": "bank",
+      "weight": 0
+    }
+  ]
+}
