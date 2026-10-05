@@ -6,8 +6,13 @@
 
 CredAI turns utility bills, mobile top-ups, wallet and bank activity into a credit score, plain-language reason codes and an underwriting decision. A lender console, customer app and model-risk workspace all sit on one engine. It runs on a realistic synthetic population out of the box, and switches to your data source with one environment variable.
 
-[Live demo](#live-demo) · [Try the model](#how-it-works) · [API](#api) · [Model card](#the-model) · [Plug in real data](#plug-in-real-data)
+**[Open the live demo →](https://credai-nabeeghs-projects.vercel.app/demo)**
 
+[Try the model](https://credai-nabeeghs-projects.vercel.app/#try) · [Lender console](https://credai-nabeeghs-projects.vercel.app/lender) · [Model card](https://credai-nabeeghs-projects.vercel.app/platform) · [API reference](https://credai-nabeeghs-projects.vercel.app/developers)
+
+[How it works](#how-it-works) · [Plug in real data](#plug-in-real-data) · [The model](#the-model) · [Run locally](#run-it-locally)
+
+[![Live demo](https://img.shields.io/badge/demo-live-0ca30c)](https://credai-nabeeghs-projects.vercel.app/demo)
 [![CI](https://github.com/M-Nabeegh/cred-ai-giki/actions/workflows/ci.yml/badge.svg)](https://github.com/M-Nabeegh/cred-ai-giki/actions/workflows/ci.yml)
 ![Next.js 16](https://img.shields.io/badge/Next.js-16-000?logo=nextdotjs)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)
@@ -32,7 +37,7 @@ Roughly four in five adults in Pakistan don't have a formal financial account ([
 
 ## Live demo
 
-Open the app and choose **Open the demo**. There's no sign-up. A guided checklist walks through the full loop in about three minutes:
+**[credai-nabeeghs-projects.vercel.app](https://credai-nabeeghs-projects.vercel.app)**. Choose **Open the demo**. There's no sign-up. A guided checklist walks through the full loop in about three minutes:
 
 1. **As Ayesha (customer):** see her score and its reasons, switch her bank account off and watch the score and loan offer recalculate.
 2. **Apply** for PKR 150,000 over 12 months, with live instalment and affordability.
@@ -136,7 +141,7 @@ All endpoints are documented in the app at `/developers`, and as OpenAPI 3.1 at 
 | `GET` | `/api/v1/health` | Provider connectivity, validated record count, latency (503 when down) |
 
 ```bash
-curl -X POST http://localhost:3000/api/v1/score \
+curl -X POST https://credai-nabeeghs-projects.vercel.app/api/v1/score \
   -H 'content-type: application/json' \
   -d @examples/customer-record.json
 ```
