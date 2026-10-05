@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -43,7 +44,5 @@ next-env.d.ts
 # qoder
 .qoder/
 
-# generated synthetic data
-# The full dataset JSON is large and fully reproducible from seed `credai-demo-v1`
-# via `npm run data:generate`. The features CSV and trained model artifact are committed.
-/data/generated/credai-demo-v1.json
+# generated training matrix (npm run model:train)
+/data/

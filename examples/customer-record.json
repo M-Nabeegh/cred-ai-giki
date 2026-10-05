@@ -1,0 +1,2338 @@
+{
+  "customer": {
+    "customerId": "cus_ix60002",
+    "displayName": "Bilal Ahmed",
+    "city": "Karachi",
+    "segment": "Ride-hailing & delivery",
+    "asOf": "2026-09-30",
+    "declaredMonthlyIncome": 47000,
+    "consent": {
+      "utility": true,
+      "telecom": true,
+      "wallet": true,
+      "bank": true,
+      "credit": true
+    },
+    "utility": {
+      "accountRef": "K-Electric-91820369",
+      "bills": [
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2025-04-04",
+          "dueDate": "2025-04-18",
+          "paidAt": "2025-04-15",
+          "amount": 2440
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2025-05-04",
+          "dueDate": "2025-05-18",
+          "paidAt": "2025-05-15",
+          "amount": 4230
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2025-06-04",
+          "dueDate": "2025-06-18",
+          "paidAt": "2025-06-15",
+          "amount": 5160
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2025-07-04",
+          "dueDate": "2025-07-18",
+          "paidAt": null,
+          "amount": 6110
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2025-08-04",
+          "dueDate": "2025-08-18",
+          "paidAt": "2025-08-13",
+          "amount": 5370
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2025-09-04",
+          "dueDate": "2025-09-18",
+          "paidAt": "2025-09-15",
+          "amount": 4520
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2025-10-04",
+          "dueDate": "2025-10-18",
+          "paidAt": "2025-10-16",
+          "amount": 2140
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2025-11-04",
+          "dueDate": "2025-11-18",
+          "paidAt": "2025-11-09",
+          "amount": 2700
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2025-12-04",
+          "dueDate": "2025-12-18",
+          "paidAt": "2025-12-15",
+          "amount": 1230
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2026-01-04",
+          "dueDate": "2026-01-18",
+          "paidAt": "2026-01-10",
+          "amount": 1390
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2026-02-04",
+          "dueDate": "2026-02-18",
+          "paidAt": "2026-02-16",
+          "amount": 1660
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2026-03-04",
+          "dueDate": "2026-03-18",
+          "paidAt": "2026-03-30",
+          "amount": 2530
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2026-04-04",
+          "dueDate": "2026-04-18",
+          "paidAt": "2026-04-15",
+          "amount": 3230
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2026-05-04",
+          "dueDate": "2026-05-18",
+          "paidAt": "2026-05-13",
+          "amount": 4390
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2026-06-04",
+          "dueDate": "2026-06-18",
+          "paidAt": "2026-06-16",
+          "amount": 3980
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2026-07-04",
+          "dueDate": "2026-07-18",
+          "paidAt": "2026-07-11",
+          "amount": 5230
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2026-08-04",
+          "dueDate": "2026-08-18",
+          "paidAt": null,
+          "amount": 5340
+        },
+        {
+          "provider": "K-Electric",
+          "kind": "electricity",
+          "issuedAt": "2026-09-04",
+          "dueDate": "2026-09-18",
+          "paidAt": "2026-09-15",
+          "amount": 3160
+        }
+      ]
+    },
+    "telecom": {
+      "operator": "Ufone",
+      "accountOpenedAt": "2018-02-28",
+      "payments": [
+        {
+          "date": "2025-04-03",
+          "amount": 950,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-04-04",
+          "amount": 900,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-04-10",
+          "amount": 350,
+          "kind": "recharge",
+          "status": "failed"
+        },
+        {
+          "date": "2025-05-13",
+          "amount": 850,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-05-05",
+          "amount": 250,
+          "kind": "recharge",
+          "status": "failed"
+        },
+        {
+          "date": "2025-06-17",
+          "amount": 600,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-06-07",
+          "amount": 1050,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-06-12",
+          "amount": 900,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-07-10",
+          "amount": 300,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-07-20",
+          "amount": 850,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-07-15",
+          "amount": 600,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-07-23",
+          "amount": 1000,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-08-19",
+          "amount": 1050,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-09-14",
+          "amount": 850,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-10-08",
+          "amount": 800,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-10-20",
+          "amount": 400,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-10-15",
+          "amount": 750,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-10-05",
+          "amount": 700,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2025-11-01",
+          "amount": 1000,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-01-16",
+          "amount": 800,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-01-20",
+          "amount": 600,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-01-24",
+          "amount": 550,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-01-10",
+          "amount": 200,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-02-20",
+          "amount": 450,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-02-15",
+          "amount": 250,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-04-26",
+          "amount": 250,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-04-22",
+          "amount": 800,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-05-17",
+          "amount": 950,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-06-15",
+          "amount": 450,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-06-18",
+          "amount": 100,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-07-14",
+          "amount": 450,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-08-08",
+          "amount": 750,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-09-14",
+          "amount": 150,
+          "kind": "recharge",
+          "status": "success"
+        },
+        {
+          "date": "2026-09-09",
+          "amount": 450,
+          "kind": "recharge",
+          "status": "success"
+        }
+      ]
+    },
+    "wallet": {
+      "provider": "NayaPay",
+      "transactions": [
+        {
+          "date": "2025-04-05",
+          "amount": 7800,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 36000,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-04-05",
+          "amount": 9700,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 26300,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2025-04-06",
+          "amount": 2450,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 23850,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2025-04-08",
+          "amount": 1550,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 22300,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-04-09",
+          "amount": 10200,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 32500,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-04-09",
+          "amount": 3150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 29350,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2025-04-09",
+          "amount": 1300,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 28050,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-04-13",
+          "amount": 6100,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 34150,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-04-14",
+          "amount": 8200,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 42350,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-04-15",
+          "amount": 9350,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 51700,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-04-15",
+          "amount": 1400,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 50300,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2025-04-17",
+          "amount": 3450,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 46850,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2025-04-18",
+          "amount": 3400,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 43450,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-04-19",
+          "amount": 9750,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 53200,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-04-19",
+          "amount": 11350,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 64550,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-04-23",
+          "amount": 3200,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 61350,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-04-27",
+          "amount": 2600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 58750,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-05-02",
+          "amount": 6450,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 65200,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-05-05",
+          "amount": 13600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 51600,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2025-05-05",
+          "amount": 7700,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 43900,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-05-06",
+          "amount": 8150,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 52050,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-05-09",
+          "amount": 5600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 46450,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2025-05-12",
+          "amount": 9550,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 56000,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-05-14",
+          "amount": 7900,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 48100,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2025-05-17",
+          "amount": 5600,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 53700,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-05-19",
+          "amount": 5900,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 47800,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-05-20",
+          "amount": 9750,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 57550,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-05-23",
+          "amount": 6600,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 64150,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-05-27",
+          "amount": 9500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 73650,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-05-27",
+          "amount": 5100,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 68550,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-05-27",
+          "amount": 5350,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 63200,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-05-28",
+          "amount": 8650,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 71850,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-06-04",
+          "amount": 4650,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 67200,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-06-05",
+          "amount": 13400,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 53800,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2025-06-07",
+          "amount": 22500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 76300,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-06-08",
+          "amount": 5550,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 70750,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2025-06-13",
+          "amount": 5350,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 65400,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2025-06-13",
+          "amount": 2650,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 62750,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-06-15",
+          "amount": 4750,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 58000,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-06-21",
+          "amount": 23800,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 81800,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-06-24",
+          "amount": 19550,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 101350,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-06-24",
+          "amount": 5800,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 95550,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-07-04",
+          "amount": 4900,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 90650,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2025-07-05",
+          "amount": 12400,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 78250,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2025-07-06",
+          "amount": 5600,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 83850,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-07-06",
+          "amount": 5300,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 78550,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-07-12",
+          "amount": 4700,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 73850,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-07-13",
+          "amount": 4500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 78350,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-07-16",
+          "amount": 7700,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 86050,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-07-16",
+          "amount": 1900,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 84150,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-07-17",
+          "amount": 2200,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 81950,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-07-18",
+          "amount": 3250,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 78700,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-07-22",
+          "amount": 3800,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 74900,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-07-24",
+          "amount": 7050,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 81950,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-07-24",
+          "amount": 7600,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 89550,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-07-27",
+          "amount": 8350,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 97900,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-07-27",
+          "amount": 5000,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 102900,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-07-27",
+          "amount": 8250,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 111150,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-07-27",
+          "amount": 4250,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 106900,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2025-08-03",
+          "amount": 6600,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 113500,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-08-05",
+          "amount": 12600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 100900,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2025-08-05",
+          "amount": 4550,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 96350,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-08-09",
+          "amount": 2550,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 93800,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-08-12",
+          "amount": 9500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 103300,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-08-12",
+          "amount": 10100,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 113400,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-08-14",
+          "amount": 11950,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 125350,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-08-16",
+          "amount": 4000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 121350,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-08-20",
+          "amount": 5750,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 115600,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-08-21",
+          "amount": 6750,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 108850,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-08-27",
+          "amount": 6150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 102700,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-09-04",
+          "amount": 8550,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 111250,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-09-04",
+          "amount": 3250,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 108000,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2025-09-05",
+          "amount": 14100,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 93900,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2025-09-06",
+          "amount": 6800,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 87100,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2025-09-10",
+          "amount": 13350,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 100450,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-09-12",
+          "amount": 3600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 96850,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-09-16",
+          "amount": 5400,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 91450,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-09-17",
+          "amount": 6150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 85300,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-09-21",
+          "amount": 6750,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 78550,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2025-09-22",
+          "amount": 16150,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 94700,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-09-26",
+          "amount": 2450,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 92250,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2025-09-27",
+          "amount": 14650,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 106900,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-10-05",
+          "amount": 14000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 92900,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2025-10-07",
+          "amount": 5500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 98400,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-10-07",
+          "amount": 6150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 92250,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-10-10",
+          "amount": 5700,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 97950,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-10-11",
+          "amount": 9000,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 106950,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-10-15",
+          "amount": 6850,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 100100,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-10-17",
+          "amount": 10900,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 111000,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-10-18",
+          "amount": 6600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 104400,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-10-20",
+          "amount": 3950,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 100450,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2025-10-21",
+          "amount": 6350,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 106800,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-10-22",
+          "amount": 7350,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 114150,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-10-24",
+          "amount": 4150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 110000,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-10-25",
+          "amount": 6100,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 103900,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-10-25",
+          "amount": 6750,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 97150,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-10-26",
+          "amount": 7750,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 104900,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-11-03",
+          "amount": 10400,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 115300,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-11-03",
+          "amount": 4150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 111150,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-11-04",
+          "amount": 3550,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 107600,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-11-05",
+          "amount": 10200,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 117800,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-11-05",
+          "amount": 15100,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 102700,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2025-11-10",
+          "amount": 3600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 99100,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-11-10",
+          "amount": 5100,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 94000,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-11-10",
+          "amount": 2500,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 91500,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2025-11-11",
+          "amount": 9950,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 101450,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-11-12",
+          "amount": 2200,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 99250,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2025-11-15",
+          "amount": 4350,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 94900,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-11-21",
+          "amount": 10500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 105400,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-11-23",
+          "amount": 9600,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 115000,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-11-25",
+          "amount": 3450,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 111550,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-11-28",
+          "amount": 3800,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 107750,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2025-12-03",
+          "amount": 6150,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 113900,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-12-03",
+          "amount": 8200,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 122100,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-12-05",
+          "amount": 13000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 109100,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2025-12-05",
+          "amount": 5600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 103500,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-12-06",
+          "amount": 4550,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 98950,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-12-08",
+          "amount": 4950,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 103900,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-12-08",
+          "amount": 4050,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 99850,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-12-09",
+          "amount": 3250,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 96600,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-12-12",
+          "amount": 6900,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 103500,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-12-14",
+          "amount": 4450,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 99050,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2025-12-16",
+          "amount": 7450,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 106500,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-12-17",
+          "amount": 4050,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 102450,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2025-12-18",
+          "amount": 4050,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 98400,
+          "counterparty": "School"
+        },
+        {
+          "date": "2025-12-19",
+          "amount": 5700,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 104100,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-12-23",
+          "amount": 4800,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 99300,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2025-12-26",
+          "amount": 6400,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 105700,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2025-12-28",
+          "amount": 8450,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 114150,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-01-02",
+          "amount": 2500,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 111650,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-01-05",
+          "amount": 13400,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 98250,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2026-01-07",
+          "amount": 7300,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 105550,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-01-09",
+          "amount": 5400,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 100150,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2026-01-12",
+          "amount": 3850,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 96300,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-01-16",
+          "amount": 3050,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 93250,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-01-18",
+          "amount": 8800,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 102050,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-01-21",
+          "amount": 2000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 100050,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-01-23",
+          "amount": 11400,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 111450,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-01-24",
+          "amount": 9400,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 120850,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-01-25",
+          "amount": 3950,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 116900,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-01-25",
+          "amount": 3650,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 113250,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-01-28",
+          "amount": 2650,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 110600,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2026-02-02",
+          "amount": 8800,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 119400,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-02-03",
+          "amount": 9150,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 128550,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-02-05",
+          "amount": 10100,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 138650,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-02-05",
+          "amount": 10700,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 127950,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2026-02-07",
+          "amount": 3250,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 124700,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2026-02-08",
+          "amount": 5750,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 130450,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-02-11",
+          "amount": 4700,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 125750,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-02-12",
+          "amount": 8750,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 134500,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-02-12",
+          "amount": 3050,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 131450,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-02-12",
+          "amount": 3150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 128300,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2026-02-15",
+          "amount": 2500,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 125800,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-02-28",
+          "amount": 3150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 122650,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2026-03-05",
+          "amount": 13000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 109650,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2026-03-07",
+          "amount": 7500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 117150,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-03-07",
+          "amount": 13350,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 130500,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-03-08",
+          "amount": 6100,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 124400,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-03-14",
+          "amount": 13250,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 137650,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-03-15",
+          "amount": 2600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 135050,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-03-16",
+          "amount": 3200,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 131850,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2026-03-18",
+          "amount": 6250,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 125600,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-03-18",
+          "amount": 5100,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 120500,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-03-23",
+          "amount": 4900,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 115600,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-03-26",
+          "amount": 7500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 123100,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-04-02",
+          "amount": 2350,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 120750,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-04-03",
+          "amount": 3350,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 117400,
+          "counterparty": "School"
+        },
+        {
+          "date": "2026-04-05",
+          "amount": 12400,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 105000,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2026-04-05",
+          "amount": 3950,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 101050,
+          "counterparty": "School"
+        },
+        {
+          "date": "2026-04-12",
+          "amount": 4200,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 96850,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-04-16",
+          "amount": 1700,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 95150,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-04-19",
+          "amount": 2450,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 92700,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-04-26",
+          "amount": 3750,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 88950,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2026-04-26",
+          "amount": 3350,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 85600,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-04-26",
+          "amount": 2050,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 83550,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2026-04-27",
+          "amount": 3000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 80550,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-05-02",
+          "amount": 5000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 75550,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-05-05",
+          "amount": 10300,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 65250,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2026-05-07",
+          "amount": 6000,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 71250,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-05-13",
+          "amount": 4800,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 76050,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-05-14",
+          "amount": 8550,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 84600,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-05-14",
+          "amount": 2000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 82600,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-05-14",
+          "amount": 4950,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 77650,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-05-18",
+          "amount": 9350,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 87000,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-05-21",
+          "amount": 3200,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 83800,
+          "counterparty": "School"
+        },
+        {
+          "date": "2026-05-24",
+          "amount": 5050,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 88850,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-05-24",
+          "amount": 4250,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 84600,
+          "counterparty": "School"
+        },
+        {
+          "date": "2026-05-25",
+          "amount": 5950,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 78650,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-05-27",
+          "amount": 9850,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 88500,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-06-02",
+          "amount": 12750,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 101250,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-06-02",
+          "amount": 4450,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 96800,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2026-06-05",
+          "amount": 12200,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 109000,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-06-05",
+          "amount": 11500,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 97500,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2026-06-15",
+          "amount": 4150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 93350,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-06-17",
+          "amount": 2300,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 91050,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-06-18",
+          "amount": 3250,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 87800,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2026-06-20",
+          "amount": 14800,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 102600,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-06-24",
+          "amount": 2800,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 99800,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-06-24",
+          "amount": 3200,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 96600,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-06-26",
+          "amount": 5600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 91000,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-07-02",
+          "amount": 6800,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 97800,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-07-02",
+          "amount": 7250,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 105050,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-07-04",
+          "amount": 6050,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 111100,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-07-05",
+          "amount": 14700,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 96400,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2026-07-05",
+          "amount": 3300,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 93100,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-07-07",
+          "amount": 3550,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 89550,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-07-13",
+          "amount": 4900,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 84650,
+          "counterparty": "School"
+        },
+        {
+          "date": "2026-07-14",
+          "amount": 3650,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 81000,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2026-07-15",
+          "amount": 2650,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 78350,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2026-07-18",
+          "amount": 9900,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 88250,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-07-20",
+          "amount": 3500,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 84750,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-07-22",
+          "amount": 6150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 78600,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-07-23",
+          "amount": 8800,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 87400,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-07-25",
+          "amount": 2950,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 84450,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-07-26",
+          "amount": 10500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 94950,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-08-01",
+          "amount": 4050,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 90900,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-08-02",
+          "amount": 6150,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 97050,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-08-05",
+          "amount": 14000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 83050,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2026-08-10",
+          "amount": 6400,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 89450,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-08-11",
+          "amount": 2800,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 86650,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-08-13",
+          "amount": 5200,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 81450,
+          "counterparty": "Medical"
+        },
+        {
+          "date": "2026-08-14",
+          "amount": 5350,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 76100,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2026-08-23",
+          "amount": 7550,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 83650,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-08-23",
+          "amount": 6000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 77650,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-08-23",
+          "amount": 5550,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 72100,
+          "counterparty": "School"
+        },
+        {
+          "date": "2026-08-25",
+          "amount": 6100,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 66000,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-08-28",
+          "amount": 6650,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 72650,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-08-28",
+          "amount": 3900,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 68750,
+          "counterparty": "School"
+        },
+        {
+          "date": "2026-09-04",
+          "amount": 6650,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 62100,
+          "counterparty": "Transfer"
+        },
+        {
+          "date": "2026-09-05",
+          "amount": 7500,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 69600,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-09-05",
+          "amount": 14300,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 55300,
+          "counterparty": "Rent"
+        },
+        {
+          "date": "2026-09-07",
+          "amount": 6100,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 49200,
+          "counterparty": "Shopping"
+        },
+        {
+          "date": "2026-09-10",
+          "amount": 5400,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 54600,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-09-13",
+          "amount": 7450,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 62050,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-09-14",
+          "amount": 5900,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 56150,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-09-14",
+          "amount": 6600,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 49550,
+          "counterparty": "Groceries"
+        },
+        {
+          "date": "2026-09-15",
+          "amount": 11150,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 60700,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-09-18",
+          "amount": 6300,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 67000,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-09-19",
+          "amount": 6150,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 60850,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-09-20",
+          "amount": 2400,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 58450,
+          "counterparty": "Fuel"
+        },
+        {
+          "date": "2026-09-25",
+          "amount": 5250,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 63700,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-09-25",
+          "amount": 6750,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 70450,
+          "counterparty": "Platform payout"
+        },
+        {
+          "date": "2026-09-25",
+          "amount": 7000,
+          "direction": "out",
+          "status": "success",
+          "balanceAfter": 63450,
+          "counterparty": "Food"
+        },
+        {
+          "date": "2026-09-26",
+          "amount": 7600,
+          "direction": "in",
+          "status": "success",
+          "balanceAfter": 71050,
+          "counterparty": "Platform payout"
+        }
+      ]
+    }
+  },
+  "loan": {
+    "amount": 80000,
+    "tenureMonths": 9,
+    "purpose": "Motorbike"
+  }
+}
