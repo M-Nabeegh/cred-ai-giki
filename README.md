@@ -116,6 +116,7 @@ Trained by `npm run model:train` on 4,000 simulated customers (1.38M raw records
 | Default rate if everyone is approved | 25.4% | Base rate |
 | Default rate among approvals at score ≥ 660 | **7.3%** | while approving 53% of applicants |
 | Default rate by grade A → E | 2.4% · 9.8% · 22.6% · 38.4% · 58.3% | monotonic |
+| Boosted-trees challenger, same held-out set | AUC 0.778 | The scorecard's 0.783 gives up nothing for its reason codes |
 
 **How the synthetic data avoids grading its own homework.** Each simulated customer has hidden traits: payment discipline, income stability, liquidity and tenure. Those traits generate *raw events*: payroll or gig payouts, rent and spending, bills paid early or late, phone recharges, and wallet transfers that bounce when the balance is short. The repayment outcome is drawn separately from the traits. The model only ever sees features computed from the events, exactly as it would from a real API, so the metrics reflect a genuine noisy learning problem rather than a circular one.
 

@@ -4,6 +4,7 @@ import { SOURCE_KEYS, type SourceKey } from "../core/schema"
 import { logitToScore, predictLogit, type ModelArtifact } from "../core/scorecard"
 import { mean, round, seededRandom, sigmoid, std } from "../core/stats"
 import { AUDIT_GROUPS, PERSONAS, generateCustomers, type GeneratedCustomer, type PersonaKey } from "../synthetic/generator"
+import { compareOn, fitBoostedTrees, predictBoosted, type BoostOptions, type ModelComparison } from "./challenger"
 
 export type Row = { id: string; values: FeatureVector; outcome: 0 | 1; group: string; persona: PersonaKey; sources: Record<SourceKey, boolean> }
 
@@ -32,6 +33,31 @@ export type Evaluation = {
   fairness: Array<{ group: string; count: number; approvalRate: number; averageScore: number; tpr: number; fpr: number; adverseImpactRatio: number; thinFileShare: number }>
   ablation: Array<{ source: SourceKey; aucWithout: number; aucDrop: number }>
   coefficients: Array<{ key: string; label: string; source: string; weight: number }>
+  /** The scorecard next to a flexible model trained on the same rows and scored on the same held-out set. */
+  challenger?: {
+    settings: { trees: number; depth: number; learningRate: number }
+    /** Both models ranked at the scorecard's approval rate, so the bad rates compare like for like. */
+    approvalRate: number
+    models: ModelComparison[]
+    aucGap: number
+  }
+}
+
+/** Fits the challenger on the training rows and scores both models on the held-out rows. */
+export function compareWithChallenger(artifact: ModelArtifact, train: Row[], test: Row[], approvalRate: number, options: BoostOptions = {}): NonNullable<Evaluation["challenger"]> {
+  const boosted = fitBoostedTrees(train, options)
+  const labels = test.map((row) => row.outcome)
+  const champion = compareOn(test.map((row) => sigmoid(predictLogit(row.values, artifact))), labels, approvalRate, auc)
+  const challenger = compareOn(test.map((row) => predictBoosted(row.values, boosted)), labels, approvalRate, auc)
+  return {
+    settings: { trees: boosted.trees.length, depth: boosted.depth, learningRate: boosted.learningRate },
+    approvalRate,
+    models: [
+      { algorithm: artifact.algorithm, label: "Scorecard (in use)", ...champion },
+      { algorithm: boosted.algorithm, label: "Boosted trees (challenger)", ...challenger },
+    ],
+    aucGap: round(challenger.auc - champion.auc, 4),
+  }
 }
 
 export function toRows(customers: GeneratedCustomer[]): Row[] {
@@ -240,11 +266,12 @@ export function evaluate(artifact: ModelArtifact, test: Row[], all: Row[], custo
   }
 }
 
-export function trainPipeline(options: { count: number; seed: string; asOf: string; version: string; trainedAt: string; iterations?: number }) {
+export function trainPipeline(options: { count: number; seed: string; asOf: string; version: string; trainedAt: string; iterations?: number; challenger?: BoostOptions }) {
   const customers = generateCustomers(options.count, options.seed, options.asOf)
   const rows = toRows(customers)
   const { train, test } = splitRows(rows)
   const artifact = fitLogistic(train, { version: options.version, seed: options.seed, asOf: options.asOf, trainedAt: options.trainedAt, testRows: test.length, iterations: options.iterations })
   const evaluation = evaluate(artifact, test, rows, customers)
+  evaluation.challenger = compareWithChallenger(artifact, train, test, evaluation.metrics.approvalRate, options.challenger)
   return { artifact, evaluation, rows, customers }
 }

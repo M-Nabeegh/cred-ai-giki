@@ -810,5 +810,36 @@
       "source": "bank",
       "weight": 0
     }
-  ]
+  ],
+  "challenger": {
+    "settings": {
+      "trees": 120,
+      "depth": 3,
+      "learningRate": 0.08
+    },
+    "approvalRate": 0.5284,
+    "models": [
+      {
+        "algorithm": "logistic_regression_l2",
+        "label": "Scorecard (in use)",
+        "auc": 0.7828,
+        "gini": 0.5656,
+        "ks": 0.4842,
+        "brier": 0.1438,
+        "logLoss": 0.4415,
+        "badRateAtApproval": 0.0732
+      },
+      {
+        "algorithm": "gradient_boosted_trees",
+        "label": "Boosted trees (challenger)",
+        "auc": 0.7784,
+        "gini": 0.5568,
+        "ks": 0.4394,
+        "brier": 0.146,
+        "logLoss": 0.446,
+        "badRateAtApproval": 0.0824
+      }
+    ],
+    "aucGap": -0.0044
+  }
 }

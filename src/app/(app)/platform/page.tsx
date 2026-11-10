@@ -18,6 +18,17 @@ function ablationSummary() {
   return `${sourceMeta[ranked[0].source as SourceKey].label} and ${label(ranked[1].source)} carry the most signal. Utility bills — which ${Math.round(evaluation.dataset.sourceAvailability.utility * 100)}% of applicants have, banked or not — cost ${utility.aucDrop.toFixed(3)} AUC to remove.${weak.length ? ` ${weak.join(" and ")} add${weak.length > 1 ? "" : "s"} little once the rest is known.` : ""}`.replace(/\. ([a-z])/g, (_, c: string) => `. ${c.toUpperCase()}`)
 }
 
+/** Written from the evaluation so the verdict stays true after every retrain. */
+function challengerSummary() {
+  const challenger = evaluation.challenger
+  if (!challenger) return ""
+  const gap = Math.abs(challenger.aucGap).toFixed(3)
+  const setup = `${challenger.settings.trees} boosted trees of depth ${challenger.settings.depth}, trained on the same customers and scored on the same held-out set.`
+  if (challenger.aucGap > 0.01) return `${setup} The challenger ranks applicants better by ${gap} AUC, which is what reason codes that add up currently cost.`
+  if (challenger.aucGap < -0.01) return `${setup} The scorecard ranks applicants better by ${gap} AUC, so the simpler model is not giving anything up.`
+  return `${setup} The two are within ${gap} AUC of each other, so the scorecard's reason codes cost no measurable accuracy.`
+}
+
 export default function ModelPage() {
   const m = evaluation.metrics
   const d = evaluation.dataset
@@ -47,6 +58,39 @@ export default function ModelPage() {
           <div className="px-3 pt-3 pb-2"><CalibrationChart data={evaluation.calibration} /></div>
         </Card>
       </div>
+
+      {evaluation.challenger ? (
+        <Card className="mt-4">
+          <CardHeader title="Scorecard vs challenger" description={challengerSummary()} />
+          <div className="overflow-x-auto">
+            <table className="mt-3 w-full min-w-[560px] text-sm tnum">
+              <thead className="border-y border-line text-left text-[13px] text-ink-3">
+                <tr>
+                  <th className="px-5 py-2 font-medium">Model</th>
+                  <th className="px-3 py-2 text-right font-medium">AUC</th>
+                  <th className="px-3 py-2 text-right font-medium">Gini</th>
+                  <th className="px-3 py-2 text-right font-medium">KS</th>
+                  <th className="px-3 py-2 text-right font-medium">Brier</th>
+                  <th className="px-5 py-2 text-right font-medium">Defaults at {Math.round(evaluation.challenger.approvalRate * 100)}% approved</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {evaluation.challenger.models.map((row) => (
+                  <tr key={row.algorithm}>
+                    <td className="px-5 py-2.5 font-medium">{row.label}</td>
+                    <td className="px-3 py-2.5 text-right">{row.auc.toFixed(3)}</td>
+                    <td className="px-3 py-2.5 text-right text-ink-2">{row.gini.toFixed(3)}</td>
+                    <td className="px-3 py-2.5 text-right text-ink-2">{row.ks.toFixed(3)}</td>
+                    <td className="px-3 py-2.5 text-right text-ink-2">{row.brier.toFixed(3)}</td>
+                    <td className="px-5 py-2.5 text-right">{(row.badRateAtApproval * 100).toFixed(1)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="px-5 py-3 text-[13px] text-ink-3">The challenger never scores an applicant. It is retrained with the scorecard so this comparison cannot go stale.</p>
+        </Card>
+      ) : null}
 
       <div className="mt-4 grid gap-4 lg:grid-cols-[1.5fr_1fr]">
         <Card>

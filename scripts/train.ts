@@ -40,4 +40,5 @@ console.log(`AUC ${m.auc}  Gini ${m.gini}  KS ${m.ks}  Brier ${m.brier}  approva
 console.log("positive rate", evaluation.dataset.positiveRate, "grades", evaluation.gradeTable.map((g) => `${g.grade}:${g.count}/${g.badRate}`).join(" "))
 console.log("ablation", evaluation.ablation.map((a) => `${a.source}:-${a.aucDrop}`).join(" "))
 console.log("fairness", evaluation.fairness.map((f) => `${f.group}:${f.approvalRate}/AIR ${f.adverseImpactRatio}`).join(" "))
+if (evaluation.challenger) console.log("challenger", evaluation.challenger.models.map((row) => `${row.algorithm}: AUC ${row.auc} KS ${row.ks} Brier ${row.brier} bad@approval ${row.badRateAtApproval}`).join(" | "), `gap ${evaluation.challenger.aucGap}`)
 console.log("top weights", evaluation.coefficients.slice(0, 8).map((c) => `${c.key}=${c.weight.toFixed(3)}`).join(" "))
